@@ -1,5 +1,5 @@
 package bomberman.model;
 
-public class Enemigo {
+public abstract class Enemigo {
 
 }
