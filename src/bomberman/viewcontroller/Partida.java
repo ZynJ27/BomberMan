@@ -3,6 +3,7 @@ package bomberman.viewcontroller;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -12,14 +13,17 @@ import javax.swing.border.LineBorder;
 import bomberman.model.TableroClassic;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 public class Partida extends JFrame{
 
@@ -53,9 +57,10 @@ public class Partida extends JFrame{
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(filas, columnas, 0, 0));
+	    
 		jLabels = new JLabel2[filas][columnas];
 		for (int i=0; i<filas;i++) {
 			for (int j=0;j<columnas;j++) {
@@ -68,10 +73,8 @@ public class Partida extends JFrame{
 
 	private JLabel getLblNewLabel(int fila, int columna) {
 		JLabel2 lblNewLabel = new JLabel2(fila,columna);
+		lblNewLabel.setOpaque(false);
 		jLabels[fila][columna]=lblNewLabel;
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBackground(Color.gray);
-		lblNewLabel.setBorder(new LineBorder(Color.black,1));
 		return lblNewLabel;
 	}
 	
@@ -88,13 +91,13 @@ public class Partida extends JFrame{
 			// TODO Auto-generated method stub
 			
 			if (e.getKeyCode()==KeyEvent.VK_W) {
-				TableroClassic.getTablero().moverBomberman(0,1);
-			}else if(e.getKeyCode()==KeyEvent.VK_A){
 				TableroClassic.getTablero().moverBomberman(-1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_S){
+			}else if(e.getKeyCode()==KeyEvent.VK_A){
 				TableroClassic.getTablero().moverBomberman(0,-1);
-			}else if(e.getKeyCode()==KeyEvent.VK_D){
+			}else if(e.getKeyCode()==KeyEvent.VK_S){
 				TableroClassic.getTablero().moverBomberman(1,0);
+			}else if(e.getKeyCode()==KeyEvent.VK_D){
+				TableroClassic.getTablero().moverBomberman(0,1);
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				TableroClassic.getTablero().ponerBomba();
 			}

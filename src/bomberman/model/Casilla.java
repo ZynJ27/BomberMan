@@ -20,8 +20,7 @@ public class Casilla extends Observable{
 		this.bomba=null;
 		this.enemigo=null;
 		this.bomberman=null;
-		setChanged();
-		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
+		
 	}
 
 	public boolean estaVacio() {
@@ -30,31 +29,37 @@ public class Casilla extends Observable{
 	
 	public void setBloque(Bloque bloque) {
 		this.bloque=bloque;
-		setChanged();
-		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
+		notificar();
 	}
 	
 	public void setBomba(Bomba bomba) {
         this.bomba = bomba;
-        setChanged();
-		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
+        notificar();
     }
 
     public void setEnemigo(Enemigo enemigo) {
         this.enemigo = enemigo;
-        setChanged();
-		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
+        notificar();
     }
 
     public void setBomberMan(Bomberman bomberMan) {
         this.bomberman = bomberMan;
-        setChanged();
-		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
+        notificar();
     }
 
 	public void quitarBomberman() {
 		// TODO Auto-generated method stub
 		this.bomberman=null;
+		notificar();
+	}
+
+	public boolean tieneBloque() {
+		// TODO Auto-generated method stub
+		return bloque!=null;
+	}
+
+	public void notificar() {
+		// TODO Auto-generated method stub
 		setChanged();
 		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
 	}

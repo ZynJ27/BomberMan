@@ -15,6 +15,14 @@ public abstract class Bomberman {
 	public int getY() {
 		return this.y;
 	}
+	
+	public void setX(int pX) {
+		this.x=pX;
+	}
+	
+	public void setY(int pY) {
+		this.y=pY;
+	}
 
 	public void mover(int pX, int pY) {
 		this.x+=pX;

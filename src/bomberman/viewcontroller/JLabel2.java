@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import bomberman.model.Bloque;
+import bomberman.model.BloqueDuro;
 import bomberman.model.Bomba;
 import bomberman.model.Bomberman;
 import bomberman.model.Casilla;
@@ -28,6 +29,7 @@ public class JLabel2 extends JLabel implements Observer{
 		x = pX;
 		y = pY;
 		TableroClassic.getTablero().setObserver(this, x, y);
+		
 	}
 	
 	public int getCoordX() {
@@ -65,7 +67,11 @@ public class JLabel2 extends JLabel implements Observer{
 			}else if(bomberman!=null) {
 				this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
 			}else if(bloque!=null) {
-				this.setIcon(new ImageIcon(getClass().getResource("soft4.png")));
+					if (bloque instanceof BloqueDuro) {
+						this.setIcon(new ImageIcon(getClass().getResource("hard5.png")));
+					} else {
+						this.setIcon(new ImageIcon(getClass().getResource("soft4.png")));
+					}
 			}else if(explosion!=null) {
 				this.setIcon(new ImageIcon(getClass().getResource("kaBomb0.png")));
 			}else if(enemigo!=null) {
@@ -73,7 +79,8 @@ public class JLabel2 extends JLabel implements Observer{
 			}else {
 				this.setIcon(null);
 			}
-			
+			this.revalidate();
+			this.repaint();
 		}
 		
 		
