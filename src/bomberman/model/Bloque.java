@@ -7,7 +7,7 @@ public abstract class Bloque {;
 		this.destructible=pDestructible;
 	}
 	
-	public boolean isDestructible() {
+	public boolean esDestructible() {
         return destructible;
     }
 }
