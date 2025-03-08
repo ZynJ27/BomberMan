@@ -57,10 +57,12 @@ public class Partida extends JFrame{
         setBounds(100, 100, 450, 300);
         setLocationRelativeTo(null);
 
+        // Cargar la imagen de fondo
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));
         Image backgroundImage = backgroundIcon.getImage();
 
-        contentPane = new Fondo(backgroundImage);
+        // Crear el panel de fondo con la imagen
+        contentPane = new Fondo(backgroundImage); // Usar BackgroundPanel
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new GridLayout(filas, columnas, 0, 0));
 

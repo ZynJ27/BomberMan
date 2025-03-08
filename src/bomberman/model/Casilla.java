@@ -63,5 +63,5 @@ public class Casilla extends Observable{
 		setChanged();
 		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
 	}
-
+	
 }

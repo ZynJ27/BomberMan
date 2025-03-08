@@ -51,5 +51,5 @@ public class TableroClassic extends Tablero{
 		}
 		return miTablero;
 	}
-	
 }
+

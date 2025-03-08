@@ -11,4 +11,6 @@ public class Main {
 		Partida pc = new Partida();
 		
 	}
+
 }
+

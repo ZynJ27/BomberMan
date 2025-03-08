@@ -42,4 +42,5 @@ public abstract class Tablero {
 		casillas[x][y].setBomba(new BombaSuper(x,y));
 	}
 
+
 }

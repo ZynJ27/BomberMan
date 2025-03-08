@@ -19,5 +19,6 @@ public abstract class Bomba {
 	}
 	
 	public abstract void explotar();
+	
 
 }
