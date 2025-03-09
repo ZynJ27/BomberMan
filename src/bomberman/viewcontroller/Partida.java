@@ -95,13 +95,13 @@ public class Partida extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
-			if (e.getKeyCode()==KeyEvent.VK_W) {
+			if (e.getKeyCode()==KeyEvent.VK_UP) {
 				TableroClassic.getTablero().moverBomberman(-1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_A){
+			}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
 				TableroClassic.getTablero().moverBomberman(0,-1);
-			}else if(e.getKeyCode()==KeyEvent.VK_S){
+			}else if(e.getKeyCode()==KeyEvent.VK_DOWN){
 				TableroClassic.getTablero().moverBomberman(1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_D){
+			}else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 				TableroClassic.getTablero().moverBomberman(0,1);
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				TableroClassic.getTablero().ponerBomba();

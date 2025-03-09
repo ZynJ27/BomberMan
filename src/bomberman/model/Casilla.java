@@ -27,6 +27,14 @@ public class Casilla extends Observable{
         return bloque == null && bomba == null && enemigo == null && bomberman == null;
     }
 	
+	public Bomberman getBomberman() {
+		return this.bomberman;
+	}
+	
+	public Bloque getBloque() {
+		return this.bloque;
+	}
+	
 	public void setBloque(Bloque bloque) {
 		this.bloque=bloque;
 		notificar();
@@ -47,21 +55,33 @@ public class Casilla extends Observable{
         notificar();
     }
 
+    public void setExplosion(Explosion e) {
+		this.explosion=e;
+		notificar();
+		
+	}
+    
 	public void quitarBomberman() {
-		// TODO Auto-generated method stub
 		this.bomberman=null;
+		notificar();
+	}
+	
+	public void quitarExplosion() {
+		this.explosion=null;
+		notificar();
+	}
+
+	public void quitarBomba() {
+		this.bomba=null;
 		notificar();
 	}
 
 	public boolean tieneBloque() {
-		// TODO Auto-generated method stub
 		return bloque!=null;
 	}
 
 	public void notificar() {
-		// TODO Auto-generated method stub
 		setChanged();
 		notifyObservers(new Object[] {(Object)this.bomberman,(Object)this.bomba,(Object)this.bloque,(Object)this.enemigo,(Object)this.explosion});
-	}
-
+	}	
 }

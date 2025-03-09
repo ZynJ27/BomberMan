@@ -36,10 +36,14 @@ public abstract class Tablero {
 	}
 
 	public void ponerBomba() {
-		// TODO Auto-generated method stub
 		int x = this.bomberMan.getX();
 		int y = this.bomberMan.getY();
 		casillas[x][y].setBomba(new BombaSuper(x,y));
 	}
+	
+	public Casilla getCasilla(int x, int y) {
+		return casillas[x][y];
+	}
+
 
 }

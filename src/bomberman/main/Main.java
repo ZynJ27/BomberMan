@@ -9,6 +9,5 @@ public class Main {
 	public static void main(String[] args) {
 		TableroClassic.getTablero();
 		Partida pc = new Partida();
-		
 	}
 }
