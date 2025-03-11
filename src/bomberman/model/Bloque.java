@@ -1,9 +1,9 @@
 package bomberman.model;
 
 public abstract class Bloque {;
-	protected boolean destructible;
+	private boolean destructible;
 	
-	public Bloque(boolean pDestructible) {
+	protected Bloque(boolean pDestructible) {
 		this.destructible=pDestructible;
 	}
 	

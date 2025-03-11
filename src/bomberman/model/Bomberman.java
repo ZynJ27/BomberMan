@@ -1,11 +1,15 @@
 package bomberman.model;
 
 public abstract class Bomberman {
-	protected int x, y;
 	
-	public Bomberman(int x, int y) {
+	private int x, y;
+	private int numBombas;
+	private int maxBombas;
+	
+	protected Bomberman(int x, int y) {
 		this.x=x;
 		this.y=y;
+		this.numBombas=0;
 	}
 	
 	public int getX() {
@@ -29,13 +33,25 @@ public abstract class Bomberman {
 		this.y+=pY;
 	}
 	
-	public abstract void plantarBomba();
+	public void plantarBomba() {
+		if (puedePlantarBomba()) {
+			this.numBombas++;
+			System.out.println(numBombas);
+		}
+	}
 	
-	public abstract boolean puedePlantarBomba();
+	public boolean puedePlantarBomba() {
+		return numBombas<maxBombas;
+	}
 	
-	public abstract void bombaExplotada();
-	
-	public abstract Bomba crearBomba();
+	public  void bombaExplotada() {
+		this.numBombas--;
+		System.out.println(numBombas);
+	}
+
+	protected void setMaxBombas(int maxBombas) {
+		this.maxBombas = maxBombas;
+	}
 	
 	
 }

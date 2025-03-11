@@ -1,10 +1,12 @@
 package bomberman.viewcontroller;
 
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import bomberman.model.Bloque;
 import bomberman.model.BloqueDuro;
@@ -28,8 +30,8 @@ public class JLabel2 extends JLabel implements Observer{
 	public JLabel2 (int pX, int pY) {
 		x = pX;
 		y = pY;
-		TableroClassic.getTablero().setObserver(this, x, y);
-		setOpaque(false);
+		TableroClassic.getTablero().getCasilla(x, y).addObserver(this);
+		
 	}
 	
 	public int getCoordX() {
@@ -45,36 +47,41 @@ public class JLabel2 extends JLabel implements Observer{
 		// TODO Auto-generated method stub
 		if (o instanceof Casilla) {
 			Object [] res = (Object[]) arg;
-			Bomberman bomberman = (Bomberman) res[0];
-			Bomba bomba = (Bomba) res[1];
-			Bloque bloque = (Bloque) res[2];
-			Enemigo enemigo = (Enemigo) res[3];
-			Explosion explosion = (Explosion) res[4];
+			String bomberman = (String) res[0];	//cambiar y poner strings
+			String bomba = (String) res[1];
+			String bloque = (String) res[2];
+			String enemigo = (String) res[3];
+			String explosion = (String) res[4];
 			
 			
-			if(bomba!=null && bomberman!=null) {
+			if(!bomba.equals("") && !bomberman.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("whitewithbomb1.png")));
-			}else if(bomberman!=null && enemigo!=null) {
+			}else if(!bomberman.equals("") && !enemigo.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("")));
-			}else if(bomba!=null && enemigo!=null) {
+			}else if(!bomba.equals("") && !enemigo.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("")));
-			}else if(enemigo!=null && explosion!=null) {
+			}else if(!enemigo.equals("") && !explosion.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("")));
-			}else if(explosion!=null && bomberman!=null) {	
+			}else if(!explosion.equals("") && !bomberman.equals("")) {	
 				this.setIcon(new ImageIcon(getClass().getResource("")));
-			}else if(bomba!=null) {
+				JOptionPane.showMessageDialog(this, "GAME OVER");
+				System.exit(0);
+			}else if(!bomba.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("bomb1.png")));
-			}else if(bomberman!=null) {
+			}else if(!bomberman.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
-			}else if(bloque!=null) {
-					if (bloque instanceof BloqueDuro) {
+			}else if(!bloque.equals("")) {
+					if (bloque.equals("duro")) {
 						this.setIcon(new ImageIcon(getClass().getResource("hard5.png")));
 					} else {
 						this.setIcon(new ImageIcon(getClass().getResource("soft4.png")));
 					}
-			}else if(explosion!=null) {
-				this.setIcon(new ImageIcon(getClass().getResource("kaBomb0.png")));
-			}else if(enemigo!=null) {
+			}else if(!explosion.equals("")) {
+				ImageIcon gif = new ImageIcon(getClass().getResource("blast.gif"));
+				this.setIcon(gif);
+				this.setHorizontalAlignment(JLabel.CENTER);
+				this.setVerticalAlignment(JLabel.CENTER);
+			}else if(!enemigo.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
 			}else {
 				this.setIcon(null);
