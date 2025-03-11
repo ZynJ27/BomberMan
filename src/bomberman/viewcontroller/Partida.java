@@ -95,17 +95,24 @@ public class Partida extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
-			if (e.getKeyCode()==KeyEvent.VK_UP) {
-				TableroClassic.getTablero().moverBomberman(-1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
-				TableroClassic.getTablero().moverBomberman(0,-1);
-			}else if(e.getKeyCode()==KeyEvent.VK_DOWN){
-				TableroClassic.getTablero().moverBomberman(1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-				TableroClassic.getTablero().moverBomberman(0,1);
-			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
+				System.out.println("Arriba");
+				TableroClassic.getTablero().moverBomberman(-1, 0);
+			} else if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
+				System.out.println("Izquierda");
+				TableroClassic.getTablero().moverBomberman(0, -1);
+			} else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
+				System.out.println("Abajo");
+				TableroClassic.getTablero().moverBomberman(1, 0);
+			} else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				System.out.println("Derecha");
+				TableroClassic.getTablero().moverBomberman(0, 1);
+			} else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+				System.out.println("BOMBA");
 				TableroClassic.getTablero().ponerBomba();
 			}
+			
+
 				
 		}
 
