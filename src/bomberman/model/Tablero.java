@@ -24,25 +24,25 @@ public abstract class Tablero {
 	}
 	
 	public void moverBomberman(int pX, int pY) {
-		int xActual = this.getBomberMan().getX();
-		int yActual = this.getBomberMan().getY();
+		int xActual = this.bomberMan.getX();
+		int yActual = this.bomberMan.getY();
 		if(xActual+pX<0||xActual+pX>=getRows()||yActual+pY<0||yActual+pY>=getCols()||getCasillas()[xActual+pX][yActual+pY].tieneBloque()) {
 		}else {
 			getCasillas()[xActual][yActual].setBomberMan(null);
-			this.getBomberMan().mover(pX, pY);
-			getCasillas()[xActual+pX][yActual+pY].setBomberMan(this.getBomberMan());
+			this.bomberMan.mover(pX, pY);
+			getCasillas()[xActual+pX][yActual+pY].setBomberMan(this.bomberMan);
 		}
 	}
 
 	public void ponerBomba() {
 		// TODO Auto-generated method stub
-		if (this.getBomberMan().puedePlantarBomba()) {
-			int x = this.getBomberMan().getX();
-			int y = this.getBomberMan().getY();
-			if (this.getBomberMan() instanceof BombermanBlanco) {
-				getCasillas()[x][y].setBomba(x,y,"super");
+		if (this.bomberMan.puedePlantarBomba()) {
+			int x = this.bomberMan.getX();
+			int y = this.bomberMan.getY();
+			if (this.bomberMan instanceof BombermanBlanco) {
+				getCasillas()[x][y].setBomba("super");
 			} else {
-				getCasillas()[x][y].setBomba(x,y,"ultra");
+				getCasillas()[x][y].setBomba("ultra");
 			}
 			
 		}	
@@ -50,32 +50,32 @@ public abstract class Tablero {
 	
 	public void explotarBomba(int pX, int pY, int pRadio) {
 		
-		getCasillas()[pX][pY].setBomba(pX,pY,"");
-		this.getBomberMan().bombaExplotada();
-		getCasillas()[pX][pY].setExplosion(new Explosion(pX,pY));
+		getCasillas()[pX][pY].setBomba("");
+		this.bomberMan.bombaExplotada();
+		getCasillas()[pX][pY].setExplosion("explosion");
 		for (int i=1;i<=pRadio;i++) {
 			if (pX-i>=0 && !getCasillas()[pX-i][pY].tieneBloqueDuro()) {
-				getCasillas()[pX-i][pY].setExplosion(new Explosion(pX-i,pY));
-				getCasillas()[pX-i][pY].setBloque(null);
+				getCasillas()[pX-i][pY].setExplosion("explosion");
+				getCasillas()[pX-i][pY].setBloque("");
 			}
 			if (pX+i<getRows() && !getCasillas()[pX+i][pY].tieneBloqueDuro()) {
-				getCasillas()[pX+i][pY].setExplosion(new Explosion(pX+i,pY));
-				getCasillas()[pX+i][pY].setBloque(null);
+				getCasillas()[pX+i][pY].setExplosion("explosion");
+				getCasillas()[pX+i][pY].setBloque("");
 			}
 			if (pY-i>=0 && !getCasillas()[pX][pY-i].tieneBloqueDuro()) {
-				getCasillas()[pX][pY-i].setExplosion(new Explosion(pX,pY-i));
-				getCasillas()[pX][pY-i].setBloque(null);
+				getCasillas()[pX][pY-i].setExplosion("explosion");
+				getCasillas()[pX][pY-i].setBloque("");
 			}
 			if (pY+i<getCols() && !getCasillas()[pX][pY+i].tieneBloqueDuro()) {
-				getCasillas()[pX][pY+i].setExplosion(new Explosion(pX,pY+i));
-				getCasillas()[pX][pY+i].setBloque(null);
+				getCasillas()[pX][pY+i].setExplosion("explosion");
+				getCasillas()[pX][pY+i].setBloque("");
 			}
 			
 		}
 	}
 
 	public void quitarExplosion(int pX, int pY) {
-		getCasillas()[pX][pY].setExplosion(null);
+		getCasillas()[pX][pY].setExplosion("");
 	}
 
 	protected static int getRows() {

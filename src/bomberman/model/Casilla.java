@@ -9,12 +9,16 @@ public class Casilla extends Observable{
 	private Enemigo enemigo;
 	private Bomberman bomberman;
 	private Explosion explosion;
+	private int x;
+	private int y;
 	
-	public Casilla() {
+	public Casilla(int pX, int pY) {
 		this.bloque=null;
 		this.bomba=null;
 		this.enemigo=null;
 		this.bomberman=null;
+		this.x=pX;
+		this.y=pY;
 		
 	}
 
@@ -22,18 +26,25 @@ public class Casilla extends Observable{
         return bloque == null && bomba == null && enemigo == null && bomberman == null;
     }
 	
-	public void setBloque(Bloque bloque) {
-		this.bloque=bloque;
+	public void setBloque(String pBloque) {
+		
+		if (pBloque.equals("duro")) {
+			this.bloque=new BloqueDuro();
+		}else if (pBloque.equals("blando")) {
+			this.bloque=new BloqueBlando();
+		}else {
+		this.bloque=null;
+		}
 		notificar();
 	}
 	
-	public void setBomba(int pX, int pY, String tipo) {
+	public void setBomba(String tipo) {
 		if ((this.bomba==null && !tipo.equals(""))||tipo.equals("")) {
 			if (tipo.equals("super")) {
-				this.bomba = new BombaSuper(pX,pY);
+				this.bomba = new BombaSuper(x,y);
 				this.bomberman.plantarBomba();
 			}else if(tipo.equals("ultra")) {
-				this.bomba = new BombaUltra(pX,pY);
+				this.bomba = new BombaUltra(x,y);
 				this.bomberman.plantarBomba();
 			} else {
 				this.bomba = null;
@@ -43,21 +54,25 @@ public class Casilla extends Observable{
         
     }
 
-    public void setEnemigo(Enemigo enemigo) {
-        this.enemigo = enemigo;
+    public void setEnemigo(Enemigo pEnemigo) {
+        this.enemigo = pEnemigo;
         notificar();
     }
 
-    public void setBomberMan(Bomberman bomberMan) {
-        this.bomberman = bomberMan;
+    public void setBomberMan(Bomberman pBomberMan) {
+        this.bomberman = pBomberMan;
         notificar();
     }
     
-    public void setExplosion(Explosion explosion) {
+    public void setExplosion(String pExplosion) {
     	if(this.explosion!=null) {
     		this.explosion.pararTimer();
     	}
-    	this.explosion = explosion;
+    	if(!pExplosion.equals("")) {
+    		this.explosion = new Explosion(x,y);
+    	}else {
+    		this.explosion = null;
+    	}
     	notificar();
     }
 
@@ -119,8 +134,7 @@ public class Casilla extends Observable{
 		return a;
 	}
 
-	public void actualizar() {
-		// TODO Auto-generated method stub
+	public void actualizar() { //Para actualizar la vista al iniciar la partida.
 		this.notificar();
 	}
 
