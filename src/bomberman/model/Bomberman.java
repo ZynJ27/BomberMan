@@ -53,5 +53,6 @@ public abstract class Bomberman {
 		this.maxBombas = maxBombas;
 	}
 	
+	public abstract String getTipo();
 	
 }

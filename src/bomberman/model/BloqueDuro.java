@@ -6,4 +6,9 @@ public class BloqueDuro extends Bloque {
 		super(false);
 	}
 
+	@Override
+	public String getTipo() {
+		return "duro";
+	}
+
 }

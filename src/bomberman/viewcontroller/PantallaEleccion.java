@@ -15,17 +15,19 @@ import java.awt.image.ColorConvertOp;
 public class PantallaEleccion extends JFrame {
 
 	private JPanel mainPanel;
-	private JLabel2 lblTitle;
-	private JLabel2 lblBoss;
+	private JLabel lblTitle;
+	private JLabel lblBoss;
 	private JLabelBomberman lblBomberman1, lblBomberman2, lblBomberman3, lblBomberman4;
-	private JLabel2 lblMonster1, lblMonster2;
+	private JLabel lblMonster1, lblMonster2;
 	private ControladorMouse controladorMouse = null;
 
 	public PantallaEleccion() {
 		setTitle("Bomberman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
+		//setBounds(390, 180, 700, 450);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null); //centrar la pantalla
 
 		mainPanel = new JPanel() {
 			@Override
@@ -39,8 +41,8 @@ public class PantallaEleccion extends JFrame {
 		setContentPane(mainPanel);
 		setVisible(true);
 
-		// Título
-		lblTitle = new JLabel2();
+		// Titulo
+		lblTitle = new JLabel();
 		lblTitle.setHorizontalAlignment(JLabel.CENTER);
 		lblTitle.setVerticalAlignment(JLabel.CENTER);
 		lblTitle.setBounds(0, 10, getWidth(), 100);
@@ -48,14 +50,14 @@ public class PantallaEleccion extends JFrame {
 		mainPanel.add(lblTitle);
 
 		// Imagen del boss
-		lblBoss = new JLabel2();
+		lblBoss = new JLabel();
 		lblBoss.setHorizontalAlignment(JLabel.CENTER);
 		lblBoss.setVerticalAlignment(JLabel.CENTER);
 		lblBoss.setBounds(248, 152, 250, 250);
 		lblBoss.setIcon(new ImageIcon(getClass().getResource("boss2.png")));
 		mainPanel.add(lblBoss);
 
-		// Imágenes de los Bomberman
+		// Imagenes de los Bomberman
 		lblBomberman1 = new JLabelBomberman("Bomberman1","bomber1.png");
 		lblBomberman1.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman1.setVerticalAlignment(JLabel.CENTER);
@@ -82,14 +84,14 @@ public class PantallaEleccion extends JFrame {
 
 
 		// Monstruos
-		lblMonster1 = new JLabel2();
+		lblMonster1 = new JLabel();
 		lblMonster1.setHorizontalAlignment(JLabel.CENTER);
 		lblMonster1.setVerticalAlignment(JLabel.CENTER);
 		lblMonster1.setBounds(10, 327, 50, 50);
 		lblMonster1.setIcon(new ImageIcon(getClass().getResource("pass1.png")));
 		mainPanel.add(lblMonster1);
 
-		lblMonster2 = new JLabel2();
+		lblMonster2 = new JLabel();
 		lblMonster2.setHorizontalAlignment(JLabel.CENTER);
 		lblMonster2.setVerticalAlignment(JLabel.CENTER);
 		lblMonster2.setIcon(new ImageIcon(getClass().getResource("doria2.png")));

@@ -77,7 +77,7 @@ public class JLabel2 extends JLabel implements Observer{
 						this.setIcon(new ImageIcon(getClass().getResource("soft4.png")));
 					}
 			}else if(!explosion.equals("")) {
-				ImageIcon gif = new ImageIcon(getClass().getResource("blast.gif"));
+				ImageIcon gif = new ImageIcon(getClass().getResource("miniBlast1.gif"));
 				this.setIcon(gif);
 				this.setHorizontalAlignment(JLabel.CENTER);
 				this.setVerticalAlignment(JLabel.CENTER);

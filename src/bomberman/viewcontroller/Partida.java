@@ -3,6 +3,7 @@ package bomberman.viewcontroller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -61,13 +62,24 @@ public class Partida extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(390, 180, 700, 450);
 		this.setResizable(false);
-		
-		 // Cargar la imagen de fondo
+		this.setLocationRelativeTo(null); //centrar la pantalla
+
+		// Cargar la imagen de fondo
         ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));
         Image backgroundImage = backgroundIcon.getImage();
 
-     // Crear el panel de fondo con la imagen
-        contentPane = new Fondo(backgroundImage); // Usar BackgroundPanel
+        // Crear el panel de fondo con la imagen
+        contentPane = new JPanel() { 
+            @Override 
+            protected void paintComponent(Graphics g) { 
+                super.paintComponent(g); 
+                // Dibuja la imagen de fondo, escalándola para que se ajuste al tamaño del panel 
+                if (backgroundImage != null) { 
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); 
+                } 
+            } 
+        };
+        
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new GridLayout(filas, columnas, 0, 0));
 		setContentPane(contentPane);

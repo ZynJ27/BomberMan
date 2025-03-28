@@ -8,4 +8,9 @@ public class BombermanNegro extends Bomberman{
 		this.setMaxBombas(1);
 	}
 
+	@Override
+	public String getTipo() {
+		return "negro";
+	}
+
 }
