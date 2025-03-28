@@ -77,6 +77,7 @@ public class Casilla extends Observable{
     }
 
 	public boolean tieneBloque() {
+		// TODO Auto-generated method stub
 		return bloque!=null;
 	}
 
@@ -91,17 +92,15 @@ public class Casilla extends Observable{
 		array[4] = (this.explosion!=null) ? "explosion" : "";
 		notifyObservers(array);
 	}
-
+	
 	public boolean tieneBloqueDuro() {
-		boolean a = false;
-		if (this.bloque.getTipo().equals("duro")) {
-			a=true;
-		}
-		return a;
+		return (bloque != null) && bloque.getTipo().equals("duro");
 	}
-
+	
 	public void actualizar() { //Para actualizar la vista al iniciar la partida.
 		this.notificar();
 	}
+
+}
 
 }
