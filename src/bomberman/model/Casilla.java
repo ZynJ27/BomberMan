@@ -126,12 +126,7 @@ public class Casilla extends Observable{
 	}
 
 	public boolean tieneBloqueDuro() {
-		// TODO Auto-generated method stub
-		boolean a = false;
-		if (this.bloque instanceof BloqueDuro) {
-			a=true;
-		}
-		return a;
+		return (bloque != null) && bloque.getTipo().equals("duro");
 	}
 
 	public void actualizar() { //Para actualizar la vista al iniciar la partida.
