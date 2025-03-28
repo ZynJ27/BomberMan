@@ -82,46 +82,14 @@ public class Casilla extends Observable{
 	}
 
 	private void notificar() {
-		// TODO Auto-generated method stub
 		setChanged();
+		// array[i] = (condicion) ? valor_si_verdadero : valor_si_falso;
 		Object[] array = new Object[5];
-		if (this.bomberman!=null) {
-			if (this.bomberman instanceof BombermanBlanco) {
-				array[0] = (Object) "blanco";
-			} else if (this.bomberman instanceof BombermanNegro) {
-				array[0] = (Object) "negro";
-			}
-		} else {
-			array[0] = "";
-		}
-		
-		if (this.bomba!=null) {
-			array[1] = (Object) "super";
-		} else {
-			array[1] = "";
-		}
-		
-		if (this.bloque!=null) {
-			if (this.bloque instanceof BloqueBlando) {
-				array[2] = (Object) "blando";
-			} else if (this.bloque instanceof BloqueDuro) {
-				array[2] = (Object) "duro";
-			}
-		} else {
-			array[2] = "";
-		}
-		
-		if (this.enemigo!=null) {
-			array[3] = (Object) "globo";
-		} else {
-			array[3] = "";
-		}
-		
-		if (this.explosion!=null) {
-			array[4] = (Object) "explosion";
-		} else {
-			array[4] = "";
-		}
+		array[0] = (this.bomberman!=null) ? this.bomberman.getTipo() : "";
+		array[1] = (this.bomba!=null) ? "super" : "";
+		array[2] = (this.bloque!=null) ? this.bloque.getTipo() : "";
+		array[3] = (this.enemigo!=null) ? "globo" : "";
+		array[4] = (this.explosion!=null) ? "explosion" : "";
 		notifyObservers(array);
 	}
 
