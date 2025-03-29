@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 public class GestorPantallaInicio extends Observable {
 	private static GestorPantallaInicio miGestor = null;
 	private String bombermanActivo;
+	private Tablero tablero;
+	private boolean partidaIniciada;
 	
 	private GestorPantallaInicio() {
 		bombermanActivo = "";
@@ -25,10 +27,23 @@ public class GestorPantallaInicio extends Observable {
 	        notificar();
 	}
 	
+	public void setPartida(String nombreBomberman)
+	{
+		bombermanActivo = nombreBomberman;
+		GestorTablero.getGestor().inicializarTablero(nombreBomberman);
+		this.partidaIniciada=true;
+		notificar();
+	}
+	
+	
+	
 	private void notificar() {
 		setChanged();
-		Object[] array = new Object[1];
+		Object[] array = new Object[2];
 		array[0] = (Object) bombermanActivo;
+		array[1]= (Object) partidaIniciada;
+		
 		notifyObservers(array);
+		
 	}
 }

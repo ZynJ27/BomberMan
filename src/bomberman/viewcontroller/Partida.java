@@ -1,33 +1,22 @@
 package bomberman.viewcontroller;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
-import bomberman.model.TableroClassic;
+import bomberman.model.GestorTablero;
 
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 
 public class Partida extends JFrame{
 
@@ -95,7 +84,8 @@ public class Partida extends JFrame{
 		@Override
 		public void windowOpened(WindowEvent e) {
 			// TODO Auto-generated method stub
-			TableroClassic.getTablero().actualizarCasillas();
+			GestorTablero.getGestor().getTablero().actualizarCasillas();
+			//cambiar por una llamada a otra mae
 		}
 
 		@Override
@@ -155,16 +145,16 @@ public class Partida extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
-			if (e.getKeyCode()==KeyEvent.VK_W) {
-				TableroClassic.getTablero().moverBomberman(-1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_A){
-				TableroClassic.getTablero().moverBomberman(0,-1);
-			}else if(e.getKeyCode()==KeyEvent.VK_S){
-				TableroClassic.getTablero().moverBomberman(1,0);
-			}else if(e.getKeyCode()==KeyEvent.VK_D){
-				TableroClassic.getTablero().moverBomberman(0,1);
+			if (e.getKeyCode()==KeyEvent.VK_W ||e.getKeyCode()==KeyEvent.VK_UP ) {
+				GestorTablero.getGestor().getTablero().moverBomberman(-1,0);
+			}else if(e.getKeyCode()==KeyEvent.VK_A || e.getKeyCode()==KeyEvent.VK_LEFT){
+				GestorTablero.getGestor().getTablero().moverBomberman(0,-1);
+			}else if(e.getKeyCode()==KeyEvent.VK_S || e.getKeyCode()==KeyEvent.VK_DOWN){
+				GestorTablero.getGestor().getTablero().moverBomberman(1,0);
+			}else if(e.getKeyCode()==KeyEvent.VK_D || e.getKeyCode()==KeyEvent.VK_RIGHT){
+				GestorTablero.getGestor().getTablero().moverBomberman(0,1);
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
-				TableroClassic.getTablero().ponerBomba();
+				GestorTablero.getGestor().getTablero().ponerBomba();
 			}
 				
 		}

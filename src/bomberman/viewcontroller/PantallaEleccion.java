@@ -5,12 +5,9 @@ import javax.swing.*;
 import bomberman.model.GestorPantallaInicio;
 
 import java.awt.*;
-import java.awt.color.ColorSpace;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ColorConvertOp;
+
 
 public class PantallaEleccion extends JFrame {
 
@@ -56,30 +53,41 @@ public class PantallaEleccion extends JFrame {
 		mainPanel.add(lblBoss);
 
 		// Imágenes de los Bomberman
-		lblBomberman1 = new JLabelBomberman("Bomberman1","bomber1.png");
+		lblBomberman1 = new JLabelBomberman("Bomberman1", "bomber1.png");
 		lblBomberman1.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman1.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman1.setBounds(145, 346, 100, 120);
+		
+		lblBomberman1.addMouseListener(getControladorMouse());
+		lblBomberman1.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman1);
 
-		lblBomberman2 = new JLabelBomberman("Bomberman2","bomber2.png");
+		lblBomberman2 = new JLabelBomberman("Bomberman2", "bomber2.png");
 		lblBomberman2.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman2.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman2.setBounds(95, 200, 100, 120);
+		
+		lblBomberman2.addMouseListener(getControladorMouse());
+		lblBomberman2.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman2);
 
-		lblBomberman3 = new JLabelBomberman("Bomberman3","bomber3.png");
+		lblBomberman3 = new JLabelBomberman("Bomberman3", "bomber3.png");
 		lblBomberman3.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman3.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman3.setBounds(574, 200, 100, 120);
+		
+		lblBomberman3.addMouseListener(getControladorMouse());
+		lblBomberman3.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman3);
 
-		lblBomberman4 = new JLabelBomberman("Bomberman4","bomber4.png");
+		lblBomberman4 = new JLabelBomberman("Bomberman4", "bomber4.png");
 		lblBomberman4.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman4.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman4.setBounds(508, 346, 100, 120);
+		
+		lblBomberman4.addMouseListener(getControladorMouse());
+		lblBomberman4.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman4);
-
 
 		// Monstruos
 		lblMonster1 = new JLabel();
@@ -95,11 +103,11 @@ public class PantallaEleccion extends JFrame {
 		lblMonster2.setIcon(new ImageIcon(getClass().getResource("doria2.png")));
 		lblMonster2.setBounds(736, 327, 50, 50);
 		mainPanel.add(lblMonster2);
-		
-		
+
+	
 		mainPanel.revalidate();
 		mainPanel.repaint();
-		mainPanel.addMouseMotionListener(this.getControladorMouse());
+
 	}
 
 	public static void main(String[] args) {
@@ -111,27 +119,47 @@ public class PantallaEleccion extends JFrame {
 			}
 		});
 	}
-	
+
 	private ControladorMouse getControladorMouse() {
 		if (controladorMouse == null) {
 			controladorMouse = new ControladorMouse();
 		}
 		return controladorMouse;
 	}
-	
+
 	private class ControladorMouse extends MouseAdapter {
-		private ControladorMouse() {}
+		private ControladorMouse() {
+		}
+
 		@Override
 		public void mouseMoved(MouseEvent e) {
-		    Component comp = ((JPanel) e.getSource()).getComponentAt(e.getPoint());
+			Component comp = e.getComponent();
 
-		    if (comp instanceof JLabelBomberman) {
-		        JLabelBomberman lbl = (JLabelBomberman) comp;
-		        GestorPantallaInicio.getGestorPantallaInicio().setBombermanActivo(lbl.getNombreBomberman());
-		    }
-		    else {
-		    	GestorPantallaInicio.getGestorPantallaInicio().setBombermanActivo("");
-		    }
+			if (comp instanceof JLabelBomberman) {
+				JLabelBomberman lbl = (JLabelBomberman) comp;
+				GestorPantallaInicio.getGestorPantallaInicio().setBombermanActivo(lbl.getNombreBomberman());
+			} else {
+				GestorPantallaInicio.getGestorPantallaInicio().setBombermanActivo("");
+			}
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			Component comp = e.getComponent();
+			if (comp instanceof JLabelBomberman) {
+				JLabelBomberman lbl = (JLabelBomberman) comp;
+				
+				// Notificar al gestor para crear el tablero adecuado
+				GestorPantallaInicio.getGestorPantallaInicio().setPartida(lbl.getNombreBomberman());
+				
+				// cerrar pantalla y abrir la de partida
+				PantallaEleccion.this.setVisible(false);
+				Partida p = new Partida();
+				p.setVisible(true);
+			}
+
+			
+
 		}
 	}
 }

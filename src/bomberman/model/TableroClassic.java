@@ -3,10 +3,8 @@ package bomberman.model;
 import java.util.Random;
 
 public class TableroClassic extends Tablero{
-
-	private static TableroClassic miTablero = null;
 	
-	private TableroClassic() {
+	public TableroClassic() {
 		super();
 		inicializarTableroClassic();
 	}
@@ -45,11 +43,6 @@ public class TableroClassic extends Tablero{
 	    getCasillas()[1][0].setBloque(""); // Asegurar que (1,0) esté vacía
 	}
 	
-	public static TableroClassic getTablero() {
-		if(miTablero==null) {
-			miTablero = new TableroClassic();
-		}
-		return miTablero;
-	}
+	
 	
 }
