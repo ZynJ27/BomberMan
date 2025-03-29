@@ -52,8 +52,6 @@ public abstract class Bomberman {
 	protected void setMaxBombas(int maxBombas) {
 		this.maxBombas = maxBombas;
 	}
-
-	protected abstract String getTipo();
 	
-	
+	public abstract String getTipo();
 }

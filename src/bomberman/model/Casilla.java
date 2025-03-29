@@ -92,7 +92,7 @@ public class Casilla extends Observable{
 		array[4] = (this.explosion!=null) ? "explosion" : "";
 		notifyObservers(array);
 	}
-
+	
 	public boolean tieneBloqueDuro() {
 		return (bloque != null) && bloque.getTipo().equals("duro");
 	}

@@ -10,6 +10,6 @@ public abstract class Bloque {;
 	public boolean esDestructible() {
         return destructible;
     }
-
-	protected abstract Object getTipo();
+	
+	public abstract String getTipo();
 }

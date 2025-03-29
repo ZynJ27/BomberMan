@@ -7,8 +7,10 @@ public class BloqueBlando extends Bloque {
 	}
 
 	@Override
-	protected Object getTipo() {
+	public String getTipo() {
 		return "blando";
 	}
+
+	
 
 }

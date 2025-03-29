@@ -7,7 +7,7 @@ public class BloqueDuro extends Bloque {
 	}
 
 	@Override
-	protected Object getTipo() {
+	public String getTipo() {
 		return "duro";
 	}
 

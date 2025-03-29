@@ -8,7 +8,7 @@ public class BombermanBlanco extends Bomberman {
 	}
 
 	@Override
-	protected String getTipo() {
+	public String getTipo() {
 		return "blanco";
 	}	
 
