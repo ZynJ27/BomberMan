@@ -3,15 +3,12 @@ package bomberman.model;
 import java.util.Random;
 
 public class TableroClassic extends Tablero{
-
-	private static TableroClassic miTablero = null;
 	
-	private TableroClassic() {
+	public TableroClassic() {
 		super();
-		inicializarTableroClassic();
 	}
 	
-	private void inicializarTableroClassic() {
+	public void inicializarTablero() {
 		//inicializar todas las casillas
 		for (int i=0;i<getRows();i++) {
 			for (int j=0;j<getCols();j++) {
@@ -41,15 +38,15 @@ public class TableroClassic extends Tablero{
 	    getCasillas()[0][0].setBomberMan(getBomberMan());
 
 	    // Asegurarse de que no haya bloques ni enemigos en (0,0), (0,1) y (1,0)
-	    getCasillas()[0][1].setBloque(""); // Asegurar que (0,1) esté vacía
-	    getCasillas()[1][0].setBloque(""); // Asegurar que (1,0) esté vacía
+	    getCasillas()[0][1].setBloque(""); // Asegurar que (0,1) esta vacia
+	    getCasillas()[1][0].setBloque(""); // Asegurar que (1,0) esta vacia
+	}
+
+	@Override
+	public String getTipoTablero() {
+		return "classic";
 	}
 	
-	public static TableroClassic getTablero() {
-		if(miTablero==null) {
-			miTablero = new TableroClassic();
-		}
-		return miTablero;
-	}
+	
 	
 }

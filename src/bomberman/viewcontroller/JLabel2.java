@@ -15,6 +15,7 @@ import bomberman.model.Bomberman;
 import bomberman.model.Casilla;
 import bomberman.model.Enemigo;
 import bomberman.model.Explosion;
+import bomberman.model.GestorTablero;
 import bomberman.model.Tablero;
 import bomberman.model.TableroClassic;
 
@@ -30,7 +31,7 @@ public class JLabel2 extends JLabel implements Observer{
 	public JLabel2 (int pX, int pY) {
 		x = pX;
 		y = pY;
-		TableroClassic.getTablero().getCasilla(x, y).addObserver(this);
+		GestorTablero.getGestor().getTablero().getCasilla(x, y).addObserver(this);
 		
 	}
 	

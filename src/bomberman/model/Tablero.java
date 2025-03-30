@@ -35,7 +35,6 @@ public abstract class Tablero {
 	}
 
 	public void ponerBomba() {
-		// TODO Auto-generated method stub
 		if (this.bomberMan.puedePlantarBomba()) {
 			int x = this.bomberMan.getX();
 			int y = this.bomberMan.getY();
@@ -49,7 +48,6 @@ public abstract class Tablero {
 	}
 	
 	public void explotarBomba(int pX, int pY, int pRadio) {
-		
 		getCasillas()[pX][pY].setBomba("");
 		this.bomberMan.bombaExplotada();
 		getCasillas()[pX][pY].setExplosion("explosion");
@@ -103,12 +101,15 @@ public abstract class Tablero {
 	}
 
 	public void actualizarCasillas() {
-		// TODO Auto-generated method stub
 		for(int i=0;i<getRows();i++) {
 			for(int j=0;j<getCols();j++) {
 				casillas[i][j].actualizar();
 			}
 		}
 	}
+
+	public abstract void inicializarTablero();
+	
+	public abstract String getTipoTablero();
 
 }

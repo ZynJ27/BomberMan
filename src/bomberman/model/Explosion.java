@@ -28,7 +28,7 @@ public class Explosion {
 	private void actualizarCont() {
 		tiempoExplosion--;
 		if (tiempoExplosion==0) {
-			TableroClassic.getTablero().quitarExplosion(x,y);
+			GestorTablero.getGestor().getTablero().quitarExplosion(x,y);
 		}
 		
 	}
