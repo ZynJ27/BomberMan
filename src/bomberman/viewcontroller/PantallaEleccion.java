@@ -15,7 +15,7 @@ public class PantallaEleccion extends JFrame {
 	private JLabel lblTitle;
 	private JLabel lblBoss2, lblBoss3;
 	private JLabelBomberman lblBomberman1, lblBomberman2, lblBomberman3, lblBomberman4;
-	private JLabel lblMonster1, lblMonster2;
+	private JLabel lblMonster1, lblMonster2, lblMonster3;
 	private JLabel lblExplosion;
 	private ControladorMouse controladorMouse = null;
 	private JComboBox<String> comboBoxTableros;
@@ -47,7 +47,6 @@ public class PantallaEleccion extends JFrame {
 		lblTitle.setIcon(new ImageIcon(getClass().getResource("title.png")));
 		mainPanel.add(lblTitle);
 		
-		
 		// Imagen del boss
 		lblBoss2 = new JLabel();
 		lblBoss2.setHorizontalAlignment(JLabel.CENTER);
@@ -76,7 +75,7 @@ public class PantallaEleccion extends JFrame {
 		lblBomberman2 = new JLabelBomberman("Bomberman2", "bomber2.png");
 		lblBomberman2.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman2.setVerticalAlignment(JLabel.CENTER);
-		lblBomberman2.setBounds(71, 141, 100, 120);
+		lblBomberman2.setBounds(61, 169, 100, 120);
 		
 		lblBomberman2.addMouseListener(getControladorMouse());
 		lblBomberman2.addMouseMotionListener(getControladorMouse());
@@ -85,7 +84,7 @@ public class PantallaEleccion extends JFrame {
 		lblBomberman3 = new JLabelBomberman("Bomberman3", "bomber3.png");
 		lblBomberman3.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman3.setVerticalAlignment(JLabel.CENTER);
-		lblBomberman3.setBounds(495, 141, 100, 120);
+		lblBomberman3.setBounds(501, 139, 100, 120);
 		
 		lblBomberman3.addMouseListener(getControladorMouse());
 		lblBomberman3.addMouseMotionListener(getControladorMouse());
@@ -104,7 +103,7 @@ public class PantallaEleccion extends JFrame {
 		lblMonster1 = new JLabel();
 		lblMonster1.setHorizontalAlignment(JLabel.CENTER);
 		lblMonster1.setVerticalAlignment(JLabel.CENTER);
-		lblMonster1.setBounds(26, 327, 50, 50);
+		lblMonster1.setBounds(49, 342, 50, 50);
 		lblMonster1.setIcon(new ImageIcon(getClass().getResource("pass1.png")));
 		mainPanel.add(lblMonster1);
 
@@ -112,20 +111,28 @@ public class PantallaEleccion extends JFrame {
 		lblMonster2.setHorizontalAlignment(JLabel.CENTER);
 		lblMonster2.setVerticalAlignment(JLabel.CENTER);
 		lblMonster2.setIcon(new ImageIcon(getClass().getResource("doria2.png")));
-		lblMonster2.setBounds(628, 346, 50, 50);
+		lblMonster2.setBounds(585, 346, 50, 50);
 		mainPanel.add(lblMonster2);
+		
+		lblMonster3 = new JLabel();
+		lblMonster3.setHorizontalAlignment(JLabel.CENTER);
+		lblMonster3.setVerticalAlignment(JLabel.CENTER);
+		lblMonster3.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
+		lblMonster3.setBounds(574, 285, 50, 50);
+		mainPanel.add(lblMonster3);
 		
 		JLabel lblTipoTablero = new JLabel("Seleccione una tablero");
 		lblTipoTablero.setForeground(Color.BLACK);
-		lblTipoTablero.setBounds(265,335,200,20);
+		lblTipoTablero.setBounds(265,335,150,20);
 		mainPanel.add(lblTipoTablero);
 		
+		// Selector de tablero
 		comboBoxTableros = new JComboBox<>();
 		comboBoxTableros.setBounds(265, 356, 150, 30);
 		comboBoxTableros.setBackground(Color.WHITE);
 		comboBoxTableros.setForeground(Color.BLACK);
         mainPanel.add(comboBoxTableros);
-        mainPanel.setComponentZOrder(comboBoxTableros, 0); 
+        //mainPanel.setComponentZOrder(comboBoxTableros, 0); 
         
         // Agregar elementos al JComboBox
         comboBoxTableros.addItem("classic");

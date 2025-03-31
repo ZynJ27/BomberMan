@@ -45,7 +45,6 @@ public class JLabel2 extends JLabel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		if (o instanceof Casilla) {
 			Object [] res = (Object[]) arg;
 			String bomberman = (String) res[0];	//cambiar y poner strings
@@ -56,7 +55,11 @@ public class JLabel2 extends JLabel implements Observer{
 			
 			
 			if(!bomba.equals("") && !bomberman.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("whitewithbomb1.png")));
+				if (bomberman.equals("blanco")) {
+					this.setIcon(new ImageIcon(getClass().getResource("whitewithbomb1.png")));
+				}else {
+					this.setIcon(new ImageIcon(getClass().getResource("blackwithbomb1.png")));
+				}
 			}else if(!bomberman.equals("") && !enemigo.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("")));
 			}else if(!bomba.equals("") && !enemigo.equals("")) {
@@ -64,13 +67,21 @@ public class JLabel2 extends JLabel implements Observer{
 			}else if(!enemigo.equals("") && !explosion.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("")));
 			}else if(!explosion.equals("") && !bomberman.equals("")) {	
-				this.setIcon(new ImageIcon(getClass().getResource("")));
+				if (bomberman.equals("blanco")) {
+					this.setIcon(new ImageIcon(getClass().getResource("onFire2.png")));
+				}else {
+					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
+				}
 				JOptionPane.showMessageDialog(this, "GAME OVER");
 				System.exit(0);
 			}else if(!bomba.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("bomb1.png")));
 			}else if(!bomberman.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
+				if (bomberman.equals("blanco")) {
+					this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
+				}else {
+					this.setIcon(new ImageIcon(getClass().getResource("blackhappy1.png")));
+				}
 			}else if(!bloque.equals("")) {
 					if (bloque.equals("duro")) {
 						this.setIcon(new ImageIcon(getClass().getResource("hard5.png")));

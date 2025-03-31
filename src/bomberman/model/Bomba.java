@@ -12,7 +12,7 @@ public abstract class Bomba {
 	protected Bomba(int x, int y) {
 		this.x=x;
 		this.y=y;
-		this.tiempoExplosion=3;
+		this.tiempoExplosion=4;
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {

@@ -12,4 +12,9 @@ public class BombermanNegro extends Bomberman{
 		return "negro";
 	}
 
+	@Override
+	public String getBomba() {
+		return "ultra";
+	}
+
 }

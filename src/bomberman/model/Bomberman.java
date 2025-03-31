@@ -54,4 +54,6 @@ public abstract class Bomberman {
 	}
 	
 	public abstract String getTipo();
+	
+	public abstract String getBomba();
 }

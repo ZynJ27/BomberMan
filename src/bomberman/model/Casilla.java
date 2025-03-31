@@ -19,7 +19,6 @@ public class Casilla extends Observable{
 		this.bomberman=null;
 		this.x=pX;
 		this.y=pY;
-		
 	}
 
 	public boolean estaVacio() {
@@ -27,7 +26,6 @@ public class Casilla extends Observable{
     }
 	
 	public void setBloque(String pBloque) {
-		
 		if (pBloque.equals("duro")) {
 			this.bloque=new BloqueDuro();
 		}else if (pBloque.equals("blando")) {
@@ -77,7 +75,6 @@ public class Casilla extends Observable{
     }
 
 	public boolean tieneBloque() {
-		// TODO Auto-generated method stub
 		return bloque!=null;
 	}
 

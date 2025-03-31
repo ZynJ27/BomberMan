@@ -38,37 +38,52 @@ public abstract class Tablero {
 		if (this.bomberMan.puedePlantarBomba()) {
 			int x = this.bomberMan.getX();
 			int y = this.bomberMan.getY();
-			if (this.bomberMan instanceof BombermanBlanco) {
-				getCasillas()[x][y].setBomba("super");
-			} else {
-				getCasillas()[x][y].setBomba("ultra");
-			}
+			getCasillas()[x][y].setBomba(this.bomberMan.getBomba());
 			
 		}	
 	}
 	
 	public void explotarBomba(int pX, int pY, int pRadio) {
+		boolean arriba=false;
+		boolean abajo=false;
+		boolean izquierda=false;
+		boolean derecha=false;
 		getCasillas()[pX][pY].setBomba("");
 		this.bomberMan.bombaExplotada();
 		getCasillas()[pX][pY].setExplosion("explosion");
 		for (int i=1;i<=pRadio;i++) {
-			if (pX-i>=0 && !getCasillas()[pX-i][pY].tieneBloqueDuro()) {
-				getCasillas()[pX-i][pY].setExplosion("explosion");
-				getCasillas()[pX-i][pY].setBloque("");
+			if(!arriba && pX-i>=0) {
+				if (!getCasillas()[pX-i][pY].tieneBloqueDuro()) {
+					getCasillas()[pX-i][pY].setExplosion("explosion");
+					getCasillas()[pX-i][pY].setBloque("");
+				} else {
+					arriba = true;
+				}
 			}
-			if (pX+i<getRows() && !getCasillas()[pX+i][pY].tieneBloqueDuro()) {
-				getCasillas()[pX+i][pY].setExplosion("explosion");
-				getCasillas()[pX+i][pY].setBloque("");
+			if (!abajo && pX+i<getRows()) {
+				if (!getCasillas()[pX+i][pY].tieneBloqueDuro()) {
+					getCasillas()[pX+i][pY].setExplosion("explosion");
+					getCasillas()[pX+i][pY].setBloque("");
+				} else { 
+					abajo = true;
+				}
 			}
-			if (pY-i>=0 && !getCasillas()[pX][pY-i].tieneBloqueDuro()) {
-				getCasillas()[pX][pY-i].setExplosion("explosion");
-				getCasillas()[pX][pY-i].setBloque("");
+			if(!izquierda && pY-i>=0) {
+				if (!getCasillas()[pX][pY-i].tieneBloqueDuro()) {
+					getCasillas()[pX][pY-i].setExplosion("explosion");
+					getCasillas()[pX][pY-i].setBloque("");
+				} else {
+					izquierda = true;
+				}
 			}
-			if (pY+i<getCols() && !getCasillas()[pX][pY+i].tieneBloqueDuro()) {
-				getCasillas()[pX][pY+i].setExplosion("explosion");
-				getCasillas()[pX][pY+i].setBloque("");
+			if (!derecha && pY+i<getCols()) {
+				if (!getCasillas()[pX][pY+i].tieneBloqueDuro()) {
+					getCasillas()[pX][pY+i].setExplosion("explosion");
+					getCasillas()[pX][pY+i].setBloque("");
+				} else {
+					derecha = true;
+				}
 			}
-			
 		}
 	}
 
@@ -96,8 +111,9 @@ public abstract class Tablero {
 		return bomberMan;
 	}
 
-	protected void setBomberMan(Bomberman bomberMan) {
+	public void setBomberMan(Bomberman bomberMan) {
 		this.bomberMan = bomberMan;
+		this.casillas[0][0].setBomberMan(bomberMan); // Bomberman en la posicion (0,0) al iniciar el juego
 	}
 
 	public void actualizarCasillas() {
