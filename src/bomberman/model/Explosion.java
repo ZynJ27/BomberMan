@@ -12,7 +12,7 @@ public class Explosion {
 	
 	public Explosion(int pX,int pY) {
 		
-		tiempoExplosion=2;
+		tiempoExplosion=3;
 		x=pX;
 		y=pY;
 		TimerTask timerTask = new TimerTask() {

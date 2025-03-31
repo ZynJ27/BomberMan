@@ -36,7 +36,6 @@ public abstract class Bomberman {
 	public void plantarBomba() {
 		if (puedePlantarBomba()) {
 			this.numBombas++;
-			System.out.println(numBombas);
 		}
 	}
 	
@@ -46,7 +45,6 @@ public abstract class Bomberman {
 	
 	public  void bombaExplotada() {
 		this.numBombas--;
-		System.out.println(numBombas);
 	}
 
 	protected void setMaxBombas(int maxBombas) {
@@ -54,4 +52,6 @@ public abstract class Bomberman {
 	}
 	
 	public abstract String getTipo();
+	
+	public abstract String getBomba();
 }
