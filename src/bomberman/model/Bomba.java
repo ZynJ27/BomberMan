@@ -24,7 +24,6 @@ public abstract class Bomba {
 	}
 	
 	protected void actualizarCont() {
-		// TODO Auto-generated method stub
 		tiempoExplosion--;
 		if (tiempoExplosion==0) {
 			this.explotar();
@@ -40,7 +39,7 @@ public abstract class Bomba {
 	}
 	
 	public void explotar() {
-		TableroClassic.getTablero().explotarBomba(x, y,radioExplosion);
+		GestorTablero.getGestor().getTablero().explotarBomba(x, y,radioExplosion);
 	}
 
 	protected void setRadioExplosion(int radioExplosion) {

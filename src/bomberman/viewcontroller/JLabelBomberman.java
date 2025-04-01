@@ -2,6 +2,8 @@ package bomberman.viewcontroller;
 
 import java.awt.Graphics;
 import java.awt.color.ColorSpace;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorConvertOp;
@@ -25,6 +27,7 @@ public class JLabelBomberman extends JLabel implements Observer {
 		this.grayIcon = toGrayScale(originalIcon);
 		this.setIcon(grayIcon);
 		GestorPantallaInicio.getGestorPantallaInicio().addObserver(this); 
+		
 	}
 	
 	 public String getNombreBomberman() {
@@ -43,12 +46,25 @@ public class JLabelBomberman extends JLabel implements Observer {
 
 		return new ImageIcon(img);
 	}
+	public boolean setCambio(String pNombreBombermanActivo)
+	{
+		if(this.nombreBomberman.equals(pNombreBombermanActivo))
+		{
+			this.setIcon(originalIcon);
+			return true;
+		}
+		else {
+			this.setIcon(grayIcon);
+			return false;
+		}
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GestorPantallaInicio) {
 			Object [] res = (Object[]) arg;
 			String bombermanActivo = (String) res[0];
+			 
 			if (bombermanActivo.equals(nombreBomberman)) {
 				this.setIcon(originalIcon);
 			}

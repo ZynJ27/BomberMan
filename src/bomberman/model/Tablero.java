@@ -35,57 +35,61 @@ public abstract class Tablero {
 	}
 
 	public void ponerBomba() {
-		// TODO Auto-generated method stub
 		if (this.bomberMan.puedePlantarBomba()) {
 			int x = this.bomberMan.getX();
 			int y = this.bomberMan.getY();
+			if (this.bomberMan instanceof BombermanBlanco) {
+				getCasillas()[x][y].setBomba("super");
+			} else {
+				getCasillas()[x][y].setBomba("ultra");
+			}
 			getCasillas()[x][y].setBomba(this.bomberMan.getBomba());
-		
-			
 		}	
 	}
 	
 	public void explotarBomba(int pX, int pY, int pRadio) {
 		boolean arriba=false;
-		boolean abajo=false;
-		boolean izquierda=false;
-		boolean derecha=false;
+ 		boolean abajo=false;
+ 		boolean izquierda=false;
+ 		boolean derecha=false;
+ 		
 		getCasillas()[pX][pY].setBomba("");
 		this.bomberMan.bombaExplotada();
 		getCasillas()[pX][pY].setExplosion("explosion");
 		for (int i=1;i<=pRadio;i++) {
 			if(!arriba && pX-i>=0) {
-				if (!getCasillas()[pX-i][pY].tieneBloqueDuro()) {
-					getCasillas()[pX-i][pY].setExplosion("explosion");
-					getCasillas()[pX-i][pY].setBloque("");
-				} else {
-					arriba = true;
-				}
-			}
+ 				if (!getCasillas()[pX-i][pY].tieneBloqueDuro()) {
+ 					getCasillas()[pX-i][pY].setExplosion("explosion");
+ 					getCasillas()[pX-i][pY].setBloque("");
+ 				} else {
+ 					arriba = true;
+ 				}
+ 			}
 			if (!abajo && pX+i<getRows()) {
-				if (!getCasillas()[pX+i][pY].tieneBloqueDuro()) {
-					getCasillas()[pX+i][pY].setExplosion("explosion");
-					getCasillas()[pX+i][pY].setBloque("");
-				} else { 
-					abajo = true;
-				}
-			}
+ 				if (!getCasillas()[pX+i][pY].tieneBloqueDuro()) {
+ 					getCasillas()[pX+i][pY].setExplosion("explosion");
+ 					getCasillas()[pX+i][pY].setBloque("");
+ 				} else { 
+ 					abajo = true;
+ 				}
+ 			}
 			if(!izquierda && pY-i>=0) {
-				if (!getCasillas()[pX][pY-i].tieneBloqueDuro()) {
-					getCasillas()[pX][pY-i].setExplosion("explosion");
-					getCasillas()[pX][pY-i].setBloque("");
-				} else {
-					izquierda = true;
-				}
-			}
+ 				if (!getCasillas()[pX][pY-i].tieneBloqueDuro()) {
+ 					getCasillas()[pX][pY-i].setExplosion("explosion");
+ 					getCasillas()[pX][pY-i].setBloque("");
+ 				} else {
+ 					izquierda = true;
+ 				}
+ 			}
 			if (!derecha && pY+i<getCols()) {
-				if (!getCasillas()[pX][pY+i].tieneBloqueDuro()) {
-					getCasillas()[pX][pY+i].setExplosion("explosion");
-					getCasillas()[pX][pY+i].setBloque("");
-				} else {
-					derecha = true;
-				}
-			}
+ 				if (!getCasillas()[pX][pY+i].tieneBloqueDuro()) {
+ 					getCasillas()[pX][pY+i].setExplosion("explosion");
+ 					getCasillas()[pX][pY+i].setBloque("");
+ 				} else {
+ 					derecha = true;
+ 				}
+ 			}
+			
 		}
 	}
 
@@ -115,15 +119,19 @@ public abstract class Tablero {
 
 	protected void setBomberMan(Bomberman bomberMan) {
 		this.bomberMan = bomberMan;
+		this.casillas[0][0].setBomberMan(bomberMan);
 	}
 
 	public void actualizarCasillas() {
-		// TODO Auto-generated method stub
 		for(int i=0;i<getRows();i++) {
 			for(int j=0;j<getCols();j++) {
 				casillas[i][j].actualizar();
 			}
 		}
 	}
+
+	public abstract void inicializarTablero();
+	
+	public abstract String getTipoTablero();
 
 }

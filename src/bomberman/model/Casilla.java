@@ -96,7 +96,7 @@ public class Casilla extends Observable{
 	public boolean tieneBloqueDuro() {
 		return (bloque != null) && bloque.getTipo().equals("duro");
 	}
-
+	
 	public void actualizar() { //Para actualizar la vista al iniciar la partida.
 		this.notificar();
 	}

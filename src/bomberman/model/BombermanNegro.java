@@ -14,7 +14,6 @@ public class BombermanNegro extends Bomberman{
 
 	@Override
 	public String getBomba() {
-		// TODO Auto-generated method stub
 		return "ultra";
 	}
 
