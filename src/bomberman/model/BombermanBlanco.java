@@ -10,12 +10,11 @@ public class BombermanBlanco extends Bomberman {
 	@Override
 	public String getTipo() {
 		return "blanco";
-	}
-
-	@Override
+	}	
+	
 	public String getBomba() {
 		// TODO Auto-generated method stub
 		return "super";
-	}	
+	}
 
 }

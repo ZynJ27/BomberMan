@@ -1,6 +1,10 @@
 package bomberman.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import bomberman.viewcontroller.JLabel2;
 
@@ -9,10 +13,70 @@ public abstract class Tablero {
 	private static final int ROWS=11;
 	private static final int COLS=17;
 	private Casilla[][] casillas;
+	private List<Enemigo> enemigos;
 	
 	protected Tablero() {
 		this.setCasillas(new Casilla[getRows()][getCols()]);
+		this.enemigos = new ArrayList<>();
+		inicializarTimer();
 	}
+	
+	private void inicializarTimer() {
+		Timer t = new Timer();
+		t.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				moverEnermigosAleatoriamente();
+			}
+		}, 0, 500);
+	}
+	
+	public void moverEnermigosAleatoriamente() {
+		Random r = new Random();
+		for (Enemigo enemigo : enemigos) {
+			int direccion = r.nextInt(4);
+			int px = 0;
+			int py = 0;
+			
+			switch(direccion) {
+			case 0:
+				px = -1;
+				break;
+			case 1:
+				px = 1;
+				break;
+			case 2:
+				py = - 1;
+				break;
+			case 3:
+				py = 1;
+				break;
+			}
+			int xActual = enemigo.getX();		
+			int yActual = enemigo.getY();
+			
+			  if (xActual + px >= 0 && xActual + px < getRows() &&
+			            yActual + py >= 0 && yActual + py < getCols() &&
+			            !getCasillas()[xActual + px][yActual + py].tieneBloque()) {
+			            
+			            getCasillas()[xActual][yActual].setEnemigo(null);
+			            enemigo.mover(px, py);
+			            getCasillas()[xActual + px][yActual + py].setEnemigo(enemigo);
+			        }
+		}	
+	}
+	
+	public boolean esPosicionValida(int nuevoX, int nuevoY) {
+		
+		if (nuevoX < 0 || nuevoY < 0 || nuevoX >= getRows() || nuevoY >= getCols()) {
+			return false;
+		}
+		return !getCasilla(nuevoX, nuevoY).tieneBloque();
+	}
+	
+	public List<Enemigo> getEnemigos(){
+		return enemigos;
+	}
+
 
 	protected boolean esPosicionInicial(int i, int j) {
 		return (i==0 && j==0) || (i==0 && j==1) || (i==1 && j==0);
