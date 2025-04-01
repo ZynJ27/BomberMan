@@ -194,12 +194,6 @@ public class PantallaEleccion extends JFrame implements Observer {
 				
 				// Notificar al gestor para crear el tablero adecuado
 				GestorPantallaInicio.getGestorPantallaInicio().setPartida(lbl.getNombreBomberman(),tipoTablero);
-				
-				// cerrar pantalla y abrir la de partida
-				//PantallaEleccion.this.setVisible(false);
-				PantallaEleccion.this.dispose();
-				Partida p = new Partida();
-				p.setVisible(true);
 			}
 
 
@@ -214,6 +208,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		if (o instanceof GestorPantallaInicio) {
 			Object [] res = (Object[]) arg;
 			String bombermanActivo = (String) res[0];
+			boolean partidaIniciada = (boolean) res[1];
 
 			boolean estaQ = false;
 			Iterator<JLabelBomberman> itr = this.getIterator();
@@ -223,6 +218,13 @@ public class PantallaEleccion extends JFrame implements Observer {
 				jlb = itr.next();
 				estaQ = jlb.setCambio(bombermanActivo);
 			}
+			
+			if (partidaIniciada) {
+				PantallaEleccion.this.dispose();
+				Partida p = new Partida();
+				p.setVisible(true);
+			}
+			
 		}
 	}
 }
