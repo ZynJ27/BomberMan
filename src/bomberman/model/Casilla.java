@@ -60,7 +60,8 @@ public class Casilla extends Observable{
     }
 
     public void setBomberMan(Bomberman pBomberMan) {
-        this.bomberman = pBomberMan;
+     
+    	this.bomberman=pBomberMan;
         notificar();
     }
     
@@ -96,9 +97,42 @@ public class Casilla extends Observable{
 	public boolean tieneBloqueDuro() {
 		return (bloque != null) && bloque.getTipo().equals("duro");
 	}
-	
+
 	public void actualizar() { //Para actualizar la vista al iniciar la partida.
 		this.notificar();
+	}
+	
+	public boolean tieneBomberman() {
+		return bomberman!=null;
+	}
+
+	public void moverBomberman(int pX, int pY) {
+		Bomberman b = this.bomberman;
+		this.setBomberMan(null);
+		b.mover(pX, pY);
+		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setBomberMan(b);
+		
+		
+	}
+
+	public void ponerBomba() {
+		if(this.bomberman.puedePlantarBomba()) {
+			this.setBomba(this.bomberman.getBomba());
+		}
+		
+	}
+
+	public void bombaExplotada() {
+		this.bomberman.bombaExplotada();
+	}
+
+	public void crearBomberMan(String string) {
+		// TODO Auto-generated method stub
+		if (string.equals("blanco")) {
+			this.bomberman=new BombermanBlanco(0,0);
+		}else {
+			this.bomberman=new BombermanNegro(0,0);
+		}
 	}
 
 }

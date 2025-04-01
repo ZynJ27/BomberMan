@@ -24,12 +24,12 @@ public class GestorTablero {
 		if (bomberman.equals("Bomberman1"))
 		{
 			System.out.println("Bomberman blanco");
-			t.setBomberMan(new BombermanBlanco(0, 0));
+			t.crearBomberMan("blanco");
 		}
 		else if (bomberman.equals("Bomberman2"))
 		{
 			System.out.println("Bomberman negro");
-			t.setBomberMan(new BombermanNegro(0, 0));
+			t.crearBomberMan("negro");
 		}
 		else if (bomberman.equals("Bomberman3"))
 		{

@@ -24,6 +24,7 @@ public abstract class Bomba {
 	}
 	
 	protected void actualizarCont() {
+		// TODO Auto-generated method stub
 		tiempoExplosion--;
 		if (tiempoExplosion==0) {
 			this.explotar();

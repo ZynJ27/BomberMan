@@ -34,15 +34,12 @@ public class TableroClassic extends Tablero{
 		}
 
 	    // Asegurarse de que no haya bloques ni enemigos en (0,0), (0,1) y (1,0)
-	    getCasillas()[0][1].setBloque(""); // Asegurar que (0,1) esta vacia
-	    getCasillas()[1][0].setBloque(""); // Asegurar que (1,0) esta vacia
+	    getCasillas()[0][1].setBloque(""); // Asegurar que (0,1) esté vacía
+	    getCasillas()[1][0].setBloque(""); // Asegurar que (1,0) esté vacía
 	}
-
-	@Override
+	
 	public String getTipoTablero() {
 		return "classic";
 	}
-	
-	
 	
 }
