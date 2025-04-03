@@ -204,7 +204,6 @@ public abstract class Tablero {
 	}
 
 	public void actualizarCasillas() {
-		// TODO Auto-generated method stub
 		for(int i=0;i<getRows();i++) {
 			for(int j=0;j<getCols();j++) {
 				casillas[i][j].actualizar();

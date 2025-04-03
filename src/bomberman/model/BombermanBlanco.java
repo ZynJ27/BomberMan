@@ -13,7 +13,6 @@ public class BombermanBlanco extends Bomberman {
 	}	
 	
 	public String getBomba() {
-		// TODO Auto-generated method stub
 		return "super";
 	}
 

@@ -19,7 +19,6 @@ public class Casilla extends Observable{
 		this.bomberman=null;
 		this.x=pX;
 		this.y=pY;
-		
 	}
 
 	public boolean estaVacio() {
@@ -27,7 +26,6 @@ public class Casilla extends Observable{
     }
 	
 	public void setBloque(String pBloque) {
-		
 		if (pBloque.equals("duro")) {
 			this.bloque=new BloqueDuro();
 		}else if (pBloque.equals("blando")) {
@@ -40,18 +38,14 @@ public class Casilla extends Observable{
 	
 	public void setBomba(String tipo) {
 		if ((this.bomba==null && !tipo.equals(""))||tipo.equals("")) {
-			if (tipo.equals("super")) {
-				this.bomba = new BombaSuper(x,y);
-				this.bomberman.plantarBomba();
-			}else if(tipo.equals("ultra")) {
-				this.bomba = new BombaUltra(x,y);
-				this.bomberman.plantarBomba();
-			} else {
+			if (tipo.equals("")) {
 				this.bomba = null;
+			} else {
+				this.bomba = BombaGenerator.getBombaGenerator().generarBomba(tipo, x, y);
+				this.bomberman.plantarBomba();
 			}
 			notificar();
 		}
-        
     }
 
     public void setEnemigo(Enemigo pEnemigo) {
@@ -60,7 +54,6 @@ public class Casilla extends Observable{
     }
 
     public void setBomberMan(Bomberman pBomberMan) {
-     
     	this.bomberman=pBomberMan;
         notificar();
     }
@@ -78,7 +71,6 @@ public class Casilla extends Observable{
     }
 
 	public boolean tieneBloque() {
-		// TODO Auto-generated method stub
 		return bloque!=null;
 	}
 
@@ -111,28 +103,20 @@ public class Casilla extends Observable{
 		this.setBomberMan(null);
 		b.mover(pX, pY);
 		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setBomberMan(b);
-		
-		
 	}
 
 	public void ponerBomba() {
 		if(this.bomberman.puedePlantarBomba()) {
 			this.setBomba(this.bomberman.getBomba());
 		}
-		
 	}
 
 	public void bombaExplotada() {
 		this.bomberman.bombaExplotada();
 	}
 
-	public void crearBomberMan(String string) {
-		// TODO Auto-generated method stub
-		if (string.equals("blanco")) {
-			this.bomberman=new BombermanBlanco(0,0);
-		}else {
-			this.bomberman=new BombermanNegro(0,0);
-		}
+	public void crearBomberMan(String tipo) {
+		this.bomberman=BombermanGenerator.getBombermanGenerator().generarBomberman(tipo,0,0);
 	}
 
 }

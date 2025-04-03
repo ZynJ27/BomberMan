@@ -9,16 +9,7 @@ import java.util.TimerTask;
 public class BombaUltra extends Bomba {
 
 	public BombaUltra(int x, int y) {
-		super(x, y);
-		this.setRadioExplosion(20);
+		super(x, y,new ExplosionUltra());
 	}
 
 }
-
-
-
-
-
-
-
-
