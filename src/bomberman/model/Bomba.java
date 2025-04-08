@@ -8,23 +8,24 @@ public abstract class Bomba {
 	private int tiempoExplosion; //tiempo en segundos para que explote
 	private int radioExplosion;
 	private Timer timer;
-	
-	protected Bomba(int x, int y) {
+	private ExplosionStrategy explosionStrategy;
+
+	protected Bomba(int x, int y, ExplosionStrategy explosionStrategy) {
 		this.x=x;
 		this.y=y;
 		this.tiempoExplosion=3;
+		this.explosionStrategy=explosionStrategy;
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
 				actualizarCont();
-			}		
+			}
 		};
 		timer = new Timer();
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
 	}
 	
 	protected void actualizarCont() {
-		// TODO Auto-generated method stub
 		tiempoExplosion--;
 		if (tiempoExplosion==0) {
 			this.explotar();
@@ -40,12 +41,7 @@ public abstract class Bomba {
 	}
 	
 	public void explotar() {
-		GestorTablero.getGestor().getTablero().explotarBomba(x, y,radioExplosion);
+		explosionStrategy.explotar(x, y);
 	}
-
-	protected void setRadioExplosion(int radioExplosion) {
-		this.radioExplosion = radioExplosion;
-	}
-	
 
 }

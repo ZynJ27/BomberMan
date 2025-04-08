@@ -26,12 +26,10 @@ public class Casilla extends Observable{
     }
 	
 	public void setBloque(String pBloque) {
-		if (pBloque.equals("duro")) {
-			this.bloque=new BloqueDuro();
-		}else if (pBloque.equals("blando")) {
-			this.bloque=new BloqueBlando();
-		}else {
-		this.bloque=null;
+		if (!pBloque.equals("")) {
+			this.bloque=BloqueGenerator.getBloqueGenerator().generarBloque(pBloque);
+		} else {
+			this.bloque=null;
 		}
 		notificar();
 	}
@@ -103,12 +101,15 @@ public class Casilla extends Observable{
 		this.setBomberMan(null);
 		b.mover(pX, pY);
 		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setBomberMan(b);
+		
+		
 	}
 
 	public void ponerBomba() {
 		if(this.bomberman.puedePlantarBomba()) {
 			this.setBomba(this.bomberman.getBomba());
 		}
+		
 	}
 
 	public void bombaExplotada() {
