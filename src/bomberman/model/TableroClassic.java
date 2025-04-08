@@ -27,7 +27,7 @@ public class TableroClassic extends Tablero{
 		Random r=new Random();
 		for (int i=0;i<getRows();i++) {
 			for (int j=0;j<getCols();j++) { //random()
-				if (getCasillas()[i][j].estaVacio() &&  !esPosicionInicial(i, j) && r.nextDouble()<0.6) {
+				if (getCasillas()[i][j].estaVacio() &&  !esPosicionInicial(i, j) && r.nextDouble()<0.45) {
 					getCasillas()[i][j].setBloque("blando");
 				}
 			}

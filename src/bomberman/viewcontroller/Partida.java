@@ -31,30 +31,30 @@ public class Partida extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Partida frame = new Partida();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Partida frame = new Partida();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Partida() {
+	public Partida(String tipoTablero) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(390, 180, 700, 450);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		
 		 // Cargar la imagen de fondo
-		String tipo=GestorTablero.getGestor().getTablero().getTipoTablero();
+		String tipo = tipoTablero;
 		ImageIcon backgroundIcon;
 		if (tipo.equals("classic")) {
 			backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));

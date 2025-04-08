@@ -209,6 +209,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 			Object [] res = (Object[]) arg;
 			String bombermanActivo = (String) res[0];
 			boolean partidaIniciada = (boolean) res[1];
+			String tipoTablero = (String) res[2];
 
 			boolean estaQ = false;
 			Iterator<JLabelBomberman> itr = this.getIterator();
@@ -221,7 +222,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 			
 			if (partidaIniciada) {
 				PantallaEleccion.this.dispose();
-				Partida p = new Partida();
+				Partida p = new Partida(tipoTablero);
 				p.setVisible(true);
 			}
 			

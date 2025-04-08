@@ -20,8 +20,7 @@ public class GestorTablero {
 	}
 	
 	public void inicializarTablero(String bomberman, String tipoTablero)
-	{	
-		
+	{
 		t=TableroGenerator.getTableroGenerator().generarTablero(tipoTablero);
 		t.inicializarTablero();
 		if (bomberman.equals("Bomberman1"))
@@ -42,26 +41,24 @@ public class GestorTablero {
 		{
 			System.out.println("Bomberman rojo");
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 6; i++) {
 			crearEnemigosAleatorio();
 		}
-
 	}
-	
-	private void crearEnemigosAleatorio() {
-		Random r = new Random();
-		int x,y;
-		do {
-			x = r.nextInt(t.getRows());
-			y = r.nextInt(t.getCols());
-		} while (!t.esPosicionValida(x, y) || (x == 0 & y == 0) || t.getCasilla(x,y).tieneBloque());
-		Enemigo enemigo = new Enemigo(x,y);
-		t.getCasilla(x,y).setEnemigo(enemigo);
-		t.getEnemigos().add(enemigo);
-		}
 	
 	public Tablero getTablero()
 	{
 		return this.t;
 	}
+	
+	private void crearEnemigosAleatorio() {
+		Random r = new Random();
+		int x,y;
+		int id=-1; //da igual que se salte numero el id siempre es distinto
+		do {
+			id=id+1;
+			x = r.nextInt(Tablero.getRows());
+			y = r.nextInt(Tablero.getCols());
+		} while (!t.crearEnemigo("globo",x, y,id));
+		}
 }

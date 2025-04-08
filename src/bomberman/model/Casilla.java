@@ -19,6 +19,7 @@ public class Casilla extends Observable{
 		this.bomberman=null;
 		this.x=pX;
 		this.y=pY;
+		
 	}
 
 	public boolean estaVacio() {
@@ -26,61 +27,83 @@ public class Casilla extends Observable{
     }
 	
 	public void setBloque(String pBloque) {
+		
 		if (!pBloque.equals("")) {
 			this.bloque=BloqueGenerator.getBloqueGenerator().generarBloque(pBloque);
-		} else {
-			this.bloque=null;
+		}else {
+		this.bloque=null;
 		}
-		notificar();
+		notificar(false);
 	}
 	
 	public void setBomba(String tipo) {
 		if ((this.bomba==null && !tipo.equals(""))||tipo.equals("")) {
-			if (tipo.equals("")) {
-				this.bomba = null;
-			} else {
-				this.bomba = BombaGenerator.getBombaGenerator().generarBomba(tipo, x, y);
+			if (!tipo.equals("")) {
+				this.bomba=BombaGenerator.getBombaGenerator().generarBomba(tipo, x, y);
 				this.bomberman.plantarBomba();
+			} else {
+				this.bomba.pararTimer();
+				this.bomba = null;
 			}
-			notificar();
+			notificar(false);
 		}
+        
     }
 
     public void setEnemigo(Enemigo pEnemigo) {
+    	boolean win = false;
+    	if(this.explosion!=null&&(pEnemigo!=null||this.enemigo!=null)) {
+    		if(pEnemigo!=null) {
+    			pEnemigo.pararTimer();
+    		}else {
+    			this.enemigo.pararTimer();
+    		}
+    		this.enemigo=null;
+    		win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();//true si hay enemigos vivos
+    	}else {
         this.enemigo = pEnemigo;
-        notificar();
+    	}
+    	notificar(win);
     }
 
     public void setBomberMan(Bomberman pBomberMan) {
     	this.bomberman=pBomberMan;
-        notificar();
+        notificar(false);
     }
     
     public void setExplosion(String pExplosion) {
+    	boolean win = false;
     	if(this.explosion!=null) {
     		this.explosion.pararTimer();
     	}
     	if(!pExplosion.equals("")) {
+    		if(this.enemigo!=null) {
+    			this.enemigo.pararTimer();
+    			this.enemigo = null;
+    			win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();
+    		}
     		this.explosion = new Explosion(x,y);
     	}else {
     		this.explosion = null;
     	}
-    	notificar();
+    	notificar(win);
     }
 
 	public boolean tieneBloque() {
+		// TODO Auto-generated method stub
 		return bloque!=null;
 	}
 
-	private void notificar() {
+	private void notificar(boolean win) {
 		setChanged();
 		// array[i] = (condicion) ? valor_si_verdadero : valor_si_falso;
-		Object[] array = new Object[5];
+		Object[] array = new Object[6];
 		array[0] = (this.bomberman!=null) ? this.bomberman.getTipo() : "";
 		array[1] = (this.bomba!=null) ? "super" : "";
 		array[2] = (this.bloque!=null) ? this.bloque.getTipo() : "";
 		array[3] = (this.enemigo!=null) ? "globo" : "";
 		array[4] = (this.explosion!=null) ? "explosion" : "";
+		array[5] = win;
 		notifyObservers(array);
 	}
 	
@@ -89,7 +112,7 @@ public class Casilla extends Observable{
 	}
 
 	public void actualizar() { //Para actualizar la vista al iniciar la partida.
-		this.notificar();
+		this.notificar(false);
 	}
 	
 	public boolean tieneBomberman() {
@@ -116,8 +139,49 @@ public class Casilla extends Observable{
 		this.bomberman.bombaExplotada();
 	}
 
-	public void crearBomberMan(String tipo) {
-		this.bomberman=BombermanGenerator.getBombermanGenerator().generarBomberman(tipo,0,0);
+	public void crearBomberMan(String string) {
+		// TODO Auto-generated method stub
+		this.bomberman=BombermanGenerator.getBombermanGenerator().generarBomberman(string, 0, 0);
+		notificar(false);
+	}
+	
+	public boolean crearEnemigo(String string,int i, int j,int id) {
+		// TODO Auto-generated method stub
+		boolean creado= false;
+		if (this.estaVacio()&& i+j>=2) {
+			if(string.equals("globo")) {
+				this.enemigo=new Enemigo1(i,j,id);
+			}
+			creado = true;
+		}
+		notificar(false);
+		return creado;
+	}
+
+	public boolean tieneEnemigo() {
+		return this.enemigo!=null;
+	}
+	
+	public boolean tieneEsteEnemigo(int id) {
+		// TODO Auto-generated method stub
+		boolean tiene = false;
+		if(this.enemigo!=null) {
+			tiene = this.enemigo.eres(id);
+		}
+		return tiene;
+	}
+
+	public void moverEnemigo(int pX, int pY) {
+		// TODO Auto-generated method stub
+		Enemigo e = this.enemigo;
+		this.setEnemigo(null);
+		e.mover(pX, pY);
+		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setEnemigo(e);
+	}
+
+	public boolean tieneExplosion() {
+		// TODO Auto-generated method stub
+		return this.explosion!=null;
 	}
 
 }

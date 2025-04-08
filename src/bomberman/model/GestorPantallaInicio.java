@@ -24,7 +24,7 @@ public class GestorPantallaInicio extends Observable {
 	
 	public void setBombermanActivo(String nombreBomberman) { 
 	        bombermanActivo = nombreBomberman;
-	        notificar();
+	        notificar("");
 	}
 	
 	public void setPartida(String nombreBomberman, String tipoTablero)
@@ -32,16 +32,17 @@ public class GestorPantallaInicio extends Observable {
 		bombermanActivo = nombreBomberman;
 		GestorTablero.getGestor().inicializarTablero(nombreBomberman, tipoTablero);
 		this.partidaIniciada=true;
-		notificar();
+		notificar(tipoTablero);
 	}
 	
 	
 	
-	private void notificar() {
+	private void notificar(String tipoTablero) {
 		setChanged();
-		Object[] array = new Object[2];
+		Object[] array = new Object[3];
 		array[0] = (Object) bombermanActivo;
 		array[1]= (Object) partidaIniciada;
+		array[2]= (Object) tipoTablero;
 		
 		notifyObservers(array);
 		

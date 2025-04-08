@@ -53,7 +53,12 @@ public class JLabel2 extends JLabel implements Observer{
 			String bloque = (String) res[2];
 			String enemigo = (String) res[3];
 			String explosion = (String) res[4];
+			boolean win = (boolean) res[5];
 			
+			if(win) {
+				JOptionPane.showMessageDialog(this, "WIN");
+				System.exit(0);
+			}
 			
 			if(!bomba.equals("") && !bomberman.equals("")) {
 				if (bomberman.equals("blanco")) {
@@ -62,11 +67,22 @@ public class JLabel2 extends JLabel implements Observer{
  					this.setIcon(new ImageIcon(getClass().getResource("blackwithbomb1.png")));
  				}
 			}else if(!bomberman.equals("") && !enemigo.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("")));
+				if (bomberman.equals("blanco")) {
+ 					this.setIcon(new ImageIcon(getClass().getResource("onFire2.png")));
+ 				}else {
+ 					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
+ 				}
+				JOptionPane.showMessageDialog(this, "GAME OVER");
+				System.exit(0);
 			}else if(!bomba.equals("") && !enemigo.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("")));
+				if (enemigo.equals("globo")) {
+					this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
+				}
 			}else if(!enemigo.equals("") && !explosion.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("")));
+				ImageIcon gif = new ImageIcon(getClass().getResource("miniBlast1.gif"));
+				this.setIcon(gif);
+				this.setHorizontalAlignment(JLabel.CENTER);
+				this.setVerticalAlignment(JLabel.CENTER);
 			}else if(!explosion.equals("") && !bomberman.equals("")) {	
 				if (bomberman.equals("blanco")) {
  					this.setIcon(new ImageIcon(getClass().getResource("onFire2.png")));
@@ -95,7 +111,9 @@ public class JLabel2 extends JLabel implements Observer{
 				this.setHorizontalAlignment(JLabel.CENTER);
 				this.setVerticalAlignment(JLabel.CENTER);
 			}else if(!enemigo.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
+				if (enemigo.equals("globo")) {
+					this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
+				}
 			}else {
 				this.setIcon(null);
 			}

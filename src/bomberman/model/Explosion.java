@@ -11,6 +11,7 @@ public class Explosion {
 	private int tiempoExplosion;
 	
 	public Explosion(int pX,int pY) {
+		
 		tiempoExplosion=3;
 		x=pX;
 		y=pY;

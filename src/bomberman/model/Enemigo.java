@@ -1,12 +1,27 @@
 package bomberman.model;
 
-public class Enemigo {
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
-    private int x, y; 
+public abstract class Enemigo {
 
-    public Enemigo(int x, int y) {
-        this.x = x;
-        this.y = y;
+	private int x, y; 
+	private int id;
+	private Timer timer;
+
+    public Enemigo(int pX, int pY, int pId) {
+        this.x = pX;
+        this.y = pY;
+        this.id = pId;
+        TimerTask timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				moverAleatorio();
+			}		
+		};
+		timer = new Timer();
+		timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
     
@@ -25,11 +40,48 @@ public class Enemigo {
     public void setY(int y) {
         this.y = y;
     }
-
-   
-    public void mover(int pX, int pY) {
-        this.x += pX;
-        this.y += pY;
+    
+    public void moverAleatorio() {
+//    	Random r = new Random();
+//    	int coord;
+//    	int x,y;
+//    	x=0;
+//    	y=0;
+//    	coord = r.nextInt(2);
+//    	if (coord == 0) {
+//    		x = r.nextInt(2);
+//    		if (x==0) {
+//    			x=-1;
+//    		}
+//    	}else {
+//    		y = r.nextInt(2);
+//    		if (y==0) {
+//    			y=-1;
+//    		}
+//	    }
+//    	GestorTablero.getGestor().getTablero().moverEnemigo(x,y,id);
+    	GestorTablero.getGestor().getTablero().moverEnemigo(x,y,id);
     }
-}
 
+
+	public boolean eres(int id2) {
+		// TODO Auto-generated method stub
+		return this.id==id2;
+	}
+
+
+	public void mover(int pX, int pY) {
+		// TODO Auto-generated method stub
+		this.x+=pX;
+		this.y+=pY;
+	}
+
+
+	public void pararTimer() {
+		// TODO Auto-generated method stub
+			this.timer.cancel();
+	}
+	
+	public abstract String getTipo();
+	
+}

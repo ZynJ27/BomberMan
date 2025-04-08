@@ -1,91 +1,28 @@
 package bomberman.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import bomberman.viewcontroller.JLabel2;
 
 public abstract class Tablero {
-	
+
 	private static final int ROWS=11;
 	private static final int COLS=17;
 	private Casilla[][] casillas;
-	private List<Enemigo> enemigos;
-	
+
 	protected Tablero() {
 		this.setCasillas(new Casilla[getRows()][getCols()]);
-		this.enemigos = new ArrayList<>();
-		inicializarTimer();
 	}
-	
-	private void inicializarTimer() {
-		Timer t = new Timer();
-		t.scheduleAtFixedRate(new TimerTask() {
-			public void run() {
-				moverEnermigosAleatoriamente();
-			}
-		}, 0, 500);
-	}
-	
-	public void moverEnermigosAleatoriamente() {
-		Random r = new Random();
-		for (Enemigo enemigo : enemigos) {
-			int direccion = r.nextInt(4);
-			int px = 0;
-			int py = 0;
-			
-			switch(direccion) {
-			case 0:
-				px = -1;
-				break;
-			case 1:
-				px = 1;
-				break;
-			case 2:
-				py = - 1;
-				break;
-			case 3:
-				py = 1;
-				break;
-			}
-			int xActual = enemigo.getX();		
-			int yActual = enemigo.getY();
-			
-			  if (xActual + px >= 0 && xActual + px < getRows() &&
-			            yActual + py >= 0 && yActual + py < getCols() &&
-			            !getCasillas()[xActual + px][yActual + py].tieneBloque()) {
-			            
-			            getCasillas()[xActual][yActual].setEnemigo(null);
-			            enemigo.mover(px, py);
-			            getCasillas()[xActual + px][yActual + py].setEnemigo(enemigo);
-			        }
-		}	
-	}
-	
-	public boolean esPosicionValida(int nuevoX, int nuevoY) {
-		
-		if (nuevoX < 0 || nuevoY < 0 || nuevoX >= getRows() || nuevoY >= getCols()) {
-			return false;
-		}
-		return !getCasilla(nuevoX, nuevoY).tieneBloque();
-	}
-	
-	public List<Enemigo> getEnemigos(){
-		return enemigos;
-	}
-
 
 	protected boolean esPosicionInicial(int i, int j) {
 		return (i==0 && j==0) || (i==0 && j==1) || (i==1 && j==0);
 	}
-	
+
 	public Casilla getCasilla(int x, int y) {
 		return casillas[x][y];
 	}
-	
+
 	public void moverBomberman(int pX, int pY) {
 		int i,j;
 		boolean movido = false;
@@ -120,9 +57,9 @@ public abstract class Tablero {
 			j=0;
 			i++;
 		}
-		
+
 	}
-	
+
 	public void explotarBomba(int pX, int pY, int pRadio) {
 		boolean arriba=false;
 		boolean abajo=false;
@@ -133,7 +70,7 @@ public abstract class Tablero {
 		i=0;
 		j=0;
 		getCasillas()[pX][pY].setBomba("");
-		
+
 		while (i<getRows() && !explotado) {
 			while (j<getCols() && !explotado) {
 				if(casillas[i][j].tieneBomberman()) {
@@ -145,7 +82,7 @@ public abstract class Tablero {
 			j=0;
 			i++;
 		}
-		
+
 		getCasillas()[pX][pY].setExplosion("explosion");
 		for (i=1;i<=pRadio;i++) {
 			if(!arriba && pX-i>=0) {
@@ -204,20 +141,77 @@ public abstract class Tablero {
 	}
 
 	public void actualizarCasillas() {
+		// TODO Auto-generated method stub
 		for(int i=0;i<getRows();i++) {
 			for(int j=0;j<getCols();j++) {
 				casillas[i][j].actualizar();
 			}
 		}
 	}
-	
+
 	protected void crearBomberMan(String bomberMan) {
 		casillas[0][0].crearBomberMan(bomberMan);
 	}
 
 	public abstract void inicializarTablero();
-	
+
 	public abstract String getTipoTablero();
 
-	
+	public boolean crearEnemigo(String nombre, int x, int y,int id) {
+
+		return casillas[x][y].crearEnemigo(nombre,x,y,id);
+	}
+
+	public void moverEnemigo(int x, int y, int id) {
+		// TODO Auto-generated method stub
+		ArrayList<String> movimientos = new ArrayList<String>();
+		if (x-1>=0&&!(casillas[x-1][y].tieneBloque()||casillas[x-1][y].tieneEnemigo()||casillas[x-1][y].tieneExplosion())) {//arriba
+			movimientos.add("Arriba");
+		}
+		if(x+1<getRows()&&!(casillas[x+1][y].tieneBloque()||casillas[x+1][y].tieneEnemigo()||casillas[x+1][y].tieneExplosion())) {//abajo
+			movimientos.add("Abajo");
+		}
+		if(y-1>=0&&!(casillas[x][y-1].tieneBloque()||casillas[x][y-1].tieneEnemigo()||casillas[x][y-1].tieneExplosion())) {//izq
+			movimientos.add("Izquierda");
+		}
+		if(y+1<getCols()&&!(casillas[x][y+1].tieneBloque()||casillas[x][y+1].tieneEnemigo()||casillas[x][y+1].tieneExplosion())) {//der
+			movimientos.add("Derecha");
+		}
+
+		Random r = new Random();
+		if(movimientos.size()>0) {
+			String mov = movimientos.get(r.nextInt(movimientos.size()));
+
+			if(mov.equals("Arriba")) {
+				casillas[x][y].moverEnemigo(-1,0);
+			}else if(mov.equals("Abajo")) {
+				casillas[x][y].moverEnemigo(1,0);
+			}else if(mov.equals("Izquierda")) {
+				casillas[x][y].moverEnemigo(0,-1);
+			}else if(mov.equals("Derecha")) {
+				casillas[x][y].moverEnemigo(0,1);
+			}
+		}
+	}
+
+	public boolean comprobarEnemigosVivos() {
+		// TODO Auto-generated method stub
+		int i,j;
+		boolean vivos = false;
+		i=0;
+		j=0;
+		while (i<getRows() && !vivos) {
+			while (j<getCols() && !vivos) {
+				if(casillas[i][j].tieneEnemigo()) {
+					vivos = true;
+					
+				}
+				j++;
+			}
+			j=0;
+			i++;
+		}
+		return vivos;
+	}
+
 }
