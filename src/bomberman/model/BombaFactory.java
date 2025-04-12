@@ -5,7 +5,7 @@ public class BombaFactory {
 
     private BombaFactory(){}
 
-    public static BombaFactory getTableroFactory(){
+    public static BombaFactory getBombaFactory(){
         if (miBombaFactory==null) { miBombaFactory=new BombaFactory(); }
         return miBombaFactory;
     }

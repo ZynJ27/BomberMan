@@ -30,7 +30,7 @@ public abstract class Tablero {
 		j=0;
 		while (i<getRows() && !movido) {
 			while (j<getCols() && !movido) {
-				if(casillas[i][j].tieneBomberman() && !(i+pX<0||i+pX>=getRows()||j+pY<0||j+pY>=getCols()||getCasillas()[i+pX][j+pY].tieneBloque())) {
+				if(casillas[i][j].tieneBomberman() && casillas[i][j].getEstadoBomberman().equals("vivo") && !(i+pX<0||i+pX>=getRows()||j+pY<0||j+pY>=getCols()||getCasillas()[i+pX][j+pY].tieneBloque())) {
 					casillas[i][j].moverBomberman(pX,pY);
 					movido = true;
 				}
@@ -48,7 +48,7 @@ public abstract class Tablero {
 		j=0;
 		while (i<getRows() && !plantado) {
 			while (j<getCols() && !plantado) {
-				if(casillas[i][j].tieneBomberman()) {
+				if(casillas[i][j].tieneBomberman() && casillas[i][j].getEstadoBomberman().equals("vivo")) {
 					casillas[i][j].ponerBomba();
 					plantado = true;
 				}

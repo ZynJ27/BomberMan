@@ -11,7 +11,7 @@ public class BombaGenerator {
     }
 
     public Bomba generarBomba(String tipo, int pX, int pY) {
-        Bomba bomba = BombaFactory.getTableroFactory().generarBomba(tipo,pX,pY);
+        Bomba bomba = BombaFactory.getBombaFactory().generarBomba(tipo,pX,pY);
         return bomba;
     }
 }

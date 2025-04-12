@@ -54,13 +54,20 @@ public class JLabel2 extends JLabel implements Observer{
 			String enemigo = (String) res[3];
 			String explosion = (String) res[4];
 			boolean win = (boolean) res[5];
+			String estadoBomberman = (String) res[6];
 			
 			if(win) {
 				JOptionPane.showMessageDialog(this, "WIN");
 				System.exit(0);
 			}
 			
-			if(!bomba.equals("") && !bomberman.equals("")) {
+			if(estadoBomberman.equals("muerto")){
+				if (bomberman.equals("blanco")) {
+					this.setIcon(new ImageIcon(getClass().getResource("onFire2.png")));
+				}else {
+					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
+				}
+			}else if (!bomba.equals("") && !bomberman.equals("")) {
 				if (bomberman.equals("blanco")) {
  					this.setIcon(new ImageIcon(getClass().getResource("whitewithbomb1.png")));
  				}else {
@@ -89,8 +96,8 @@ public class JLabel2 extends JLabel implements Observer{
  				}else {
  					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
  				}
-				JOptionPane.showMessageDialog(this, "GAME OVER");
-				System.exit(0);
+				//JOptionPane.showMessageDialog(this, "GAME OVER");
+				//System.exit(0);
 			}else if(!bomba.equals("")) {
 				this.setIcon(new ImageIcon(getClass().getResource("bomb1.png")));
 			}else if(!bomberman.equals("")) {

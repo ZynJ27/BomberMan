@@ -5,11 +5,13 @@ public abstract class Bomberman {
 	private int x, y;
 	private int numBombas;
 	private int maxBombas;
-	
+	private EstadoBomberman estado;
+
 	protected Bomberman(int x, int y) {
 		this.x=x;
 		this.y=y;
 		this.numBombas=0;
+		this.estado=new EstadoVivo();
 	}
 	
 	public int getX() {
@@ -54,4 +56,21 @@ public abstract class Bomberman {
 	public abstract String getTipo();
 	
 	public abstract String getBomba();
+
+	public void changeState(EstadoBomberman nuevoEstado) {
+		this.estado=nuevoEstado;
+	}
+
+	public void realizarMovimiento(int pX, int pY) {
+		this.estado.realizarMovimiento(this,pX,pY);
+	}
+
+	public void realizarPlantadoBomba() {
+		this.estado.realizarPlantadoBomba(this);
+	}
+
+	public String getEstadoActual() {
+		return estado.getNombreEstado();
+	}
+
 }

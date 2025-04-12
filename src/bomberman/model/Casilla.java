@@ -40,7 +40,7 @@ public class Casilla extends Observable{
 		if ((this.bomba==null && !tipo.equals(""))||tipo.equals("")) {
 			if (!tipo.equals("")) {
 				this.bomba=BombaGenerator.getBombaGenerator().generarBomba(tipo, x, y);
-				this.bomberman.plantarBomba();
+				this.bomberman.realizarPlantadoBomba();
 			} else {
 				this.bomba.pararTimer();
 				this.bomba = null;
@@ -77,6 +77,9 @@ public class Casilla extends Observable{
     		this.explosion.pararTimer();
     	}
     	if(!pExplosion.equals("")) {
+			if (this.bomberman != null) {
+				this.bomberman.changeState(new EstadoMuerto());
+			}
     		if(this.enemigo!=null) {
     			this.enemigo.pararTimer();
     			this.enemigo = null;
@@ -97,13 +100,14 @@ public class Casilla extends Observable{
 	private void notificar(boolean win) {
 		setChanged();
 		// array[i] = (condicion) ? valor_si_verdadero : valor_si_falso;
-		Object[] array = new Object[6];
+		Object[] array = new Object[7];
 		array[0] = (this.bomberman!=null) ? this.bomberman.getTipo() : "";
 		array[1] = (this.bomba!=null) ? "super" : "";
 		array[2] = (this.bloque!=null) ? this.bloque.getTipo() : "";
 		array[3] = (this.enemigo!=null) ? "globo" : "";
 		array[4] = (this.explosion!=null) ? "explosion" : "";
 		array[5] = win;
+		array[6] = (this.bomberman!=null) ? this.bomberman.getEstadoActual() : "";;
 		notifyObservers(array);
 	}
 	
@@ -122,7 +126,7 @@ public class Casilla extends Observable{
 	public void moverBomberman(int pX, int pY) {
 		Bomberman b = this.bomberman;
 		this.setBomberMan(null);
-		b.mover(pX, pY);
+		b.realizarMovimiento(pX, pY);
 		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setBomberMan(b);
 		
 		
@@ -182,6 +186,10 @@ public class Casilla extends Observable{
 	public boolean tieneExplosion() {
 		// TODO Auto-generated method stub
 		return this.explosion!=null;
+	}
+
+	public String getEstadoBomberman(){
+		return this.bomberman.getEstadoActual();
 	}
 
 }
