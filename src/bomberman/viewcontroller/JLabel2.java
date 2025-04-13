@@ -79,8 +79,8 @@ public class JLabel2 extends JLabel implements Observer{
  				}else {
  					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
  				}
-				JOptionPane.showMessageDialog(this, "GAME OVER");
-				System.exit(0);
+//				JOptionPane.showMessageDialog(this, "GAME OVER");
+//				System.exit(0);
 			}else if(!bomba.equals("") && !enemigo.equals("")) {
 				if (enemigo.equals("globo")) {
 					this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));

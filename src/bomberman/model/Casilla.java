@@ -63,11 +63,19 @@ public class Casilla extends Observable{
     	}else {
         this.enemigo = pEnemigo;
     	}
+    	
+    	if(pEnemigo!=null&&this.bomberman!=null) {
+    		this.bomberman.changeState(new EstadoMuerto());
+    	}
+    	
     	notificar(win);
     }
 
     public void setBomberMan(Bomberman pBomberMan) {
     	this.bomberman=pBomberMan;
+    	if (pBomberMan!=null&&(this.enemigo!=null||this.explosion!=null)) {
+    		this.bomberman.changeState(new EstadoMuerto());
+    	}
         notificar(false);
     }
     
@@ -177,10 +185,12 @@ public class Casilla extends Observable{
 
 	public void moverEnemigo(int pX, int pY) {
 		// TODO Auto-generated method stub
-		Enemigo e = this.enemigo;
-		this.setEnemigo(null);
-		e.mover(pX, pY);
-		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setEnemigo(e);
+		if(this.enemigo!=null) {
+			Enemigo e = this.enemigo;
+			this.setEnemigo(null);
+			e.mover(pX, pY);
+			GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setEnemigo(e);
+		}
 	}
 
 	public boolean tieneExplosion() {
