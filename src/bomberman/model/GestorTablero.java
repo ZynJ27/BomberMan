@@ -42,7 +42,16 @@ public class GestorTablero {
 			System.out.println("Bomberman rojo");
 		}
 		for (int i = 0; i < 6; i++) {
-			crearEnemigosAleatorio();
+			if (tipoTablero.equals("classic")) {
+				crearEnemigosAleatorio("baloon");
+			} else if (tipoTablero.equals("soft")) {
+				crearEnemigosAleatorio("doria");
+			} else { // empty
+				String[] tipos = {"baloon", "doria", "pass"};
+				Random r = new Random();
+				String randomTipo = tipos[r.nextInt(tipos.length)];
+				crearEnemigosAleatorio(randomTipo);
+			}
 		}
 	}
 	
@@ -51,7 +60,7 @@ public class GestorTablero {
 		return this.t;
 	}
 	
-	private void crearEnemigosAleatorio() {
+	private void crearEnemigosAleatorio(String tipo) {
 		Random r = new Random();
 		int x,y;
 		int id=-1; //da igual que se salte numero el id siempre es distinto
@@ -59,6 +68,6 @@ public class GestorTablero {
 			id=id+1;
 			x = r.nextInt(Tablero.getRows());
 			y = r.nextInt(Tablero.getCols());
-		} while (!t.crearEnemigo("globo",x, y,id));
+		} while (!t.crearEnemigo(tipo, x, y, id));
 		}
 }

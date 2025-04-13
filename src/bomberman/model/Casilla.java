@@ -19,7 +19,6 @@ public class Casilla extends Observable{
 		this.bomberman=null;
 		this.x=pX;
 		this.y=pY;
-		
 	}
 
 	public boolean estaVacio() {
@@ -47,7 +46,6 @@ public class Casilla extends Observable{
 			}
 			notificar(false);
 		}
-        
     }
 
     public void setEnemigo(Enemigo pEnemigo) {
@@ -67,7 +65,6 @@ public class Casilla extends Observable{
     	if(pEnemigo!=null&&this.bomberman!=null) {
     		this.bomberman.changeState(new EstadoMuerto());
     	}
-    	
     	notificar(win);
     }
 
@@ -110,9 +107,9 @@ public class Casilla extends Observable{
 		// array[i] = (condicion) ? valor_si_verdadero : valor_si_falso;
 		Object[] array = new Object[7];
 		array[0] = (this.bomberman!=null) ? this.bomberman.getTipo() : "";
-		array[1] = (this.bomba!=null) ? "super" : "";
+		array[1] = (this.bomba!=null) ? this.bomba.getTipo() : "";
 		array[2] = (this.bloque!=null) ? this.bloque.getTipo() : "";
-		array[3] = (this.enemigo!=null) ? "globo" : "";
+		array[3] = (this.enemigo!=null) ? this.enemigo.getTipo() : "";
 		array[4] = (this.explosion!=null) ? "explosion" : "";
 		array[5] = win;
 		array[6] = (this.bomberman!=null) ? this.bomberman.getEstadoActual() : "";;
@@ -136,15 +133,12 @@ public class Casilla extends Observable{
 		this.setBomberMan(null);
 		b.realizarMovimiento(pX, pY);
 		GestorTablero.getGestor().getTablero().getCasilla(this.x+pX,this.y+pY).setBomberMan(b);
-		
-		
 	}
 
 	public void ponerBomba() {
 		if(this.bomberman.puedePlantarBomba()) {
 			this.setBomba(this.bomberman.getBomba());
 		}
-		
 	}
 
 	public void bombaExplotada() {
@@ -152,18 +146,14 @@ public class Casilla extends Observable{
 	}
 
 	public void crearBomberMan(String string) {
-		// TODO Auto-generated method stub
 		this.bomberman=BombermanGenerator.getBombermanGenerator().generarBomberman(string, 0, 0);
 		notificar(false);
 	}
 	
-	public boolean crearEnemigo(String string,int i, int j,int id) {
-		// TODO Auto-generated method stub
+	public boolean crearEnemigo(String string,int i, int j, int id) {
 		boolean creado= false;
 		if (this.estaVacio()&& i+j>=2) {
-			if(string.equals("globo")) {
-				this.enemigo=new Enemigo1(i,j,id);
-			}
+			this.enemigo=EnemigoGenerator.getEnemigoGenerator().generarEnemigo(string, i, j, id);
 			creado = true;
 		}
 		notificar(false);
@@ -175,7 +165,6 @@ public class Casilla extends Observable{
 	}
 	
 	public boolean tieneEsteEnemigo(int id) {
-		// TODO Auto-generated method stub
 		boolean tiene = false;
 		if(this.enemigo!=null) {
 			tiene = this.enemigo.eres(id);
@@ -184,7 +173,6 @@ public class Casilla extends Observable{
 	}
 
 	public void moverEnemigo(int pX, int pY) {
-		// TODO Auto-generated method stub
 		if(this.enemigo!=null) {
 			Enemigo e = this.enemigo;
 			this.setEnemigo(null);
@@ -194,7 +182,6 @@ public class Casilla extends Observable{
 	}
 
 	public boolean tieneExplosion() {
-		// TODO Auto-generated method stub
 		return this.explosion!=null;
 	}
 

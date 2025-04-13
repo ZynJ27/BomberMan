@@ -71,7 +71,7 @@ public class JLabel2 extends JLabel implements Observer{
 				if (bomberman.equals("blanco")) {
  					this.setIcon(new ImageIcon(getClass().getResource("whitewithbomb1.png")));
  				}else {
- 					this.setIcon(new ImageIcon(getClass().getResource("blackwithbomb1.png")));
+ 					this.setIcon(new ImageIcon(getClass().getResource("blackwithbomb2.png")));
  				}
 			}else if(!bomberman.equals("") && !enemigo.equals("")) {
 				if (bomberman.equals("blanco")) {
@@ -99,7 +99,11 @@ public class JLabel2 extends JLabel implements Observer{
 				//JOptionPane.showMessageDialog(this, "GAME OVER");
 				//System.exit(0);
 			}else if(!bomba.equals("")) {
-				this.setIcon(new ImageIcon(getClass().getResource("bomb1.png")));
+				if (bomba.equals("super")) {
+					this.setIcon(new ImageIcon(getClass().getResource("bomb1.png")));
+				} else {
+					this.setIcon(new ImageIcon(getClass().getResource("bomb2.png")));
+				}
 			}else if(!bomberman.equals("")) {
 				if (bomberman.equals("blanco")) {
  					this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
@@ -118,8 +122,12 @@ public class JLabel2 extends JLabel implements Observer{
 				this.setHorizontalAlignment(JLabel.CENTER);
 				this.setVerticalAlignment(JLabel.CENTER);
 			}else if(!enemigo.equals("")) {
-				if (enemigo.equals("globo")) {
+				if (enemigo.equals("baloon")) {
 					this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
+				} else if (enemigo.equals("doria")) {
+					this.setIcon(new ImageIcon(getClass().getResource("doria1.png")));
+				} else {
+					this.setIcon(new ImageIcon(getClass().getResource("pass1.png")));
 				}
 			}else {
 				this.setIcon(null);

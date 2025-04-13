@@ -7,4 +7,9 @@ public class BombaUltra extends Bomba {
 		this.setRadioExplosion(20);
 	}
 
+	@Override
+	public String getTipo() {
+		return "ultra";
+	}
+
 }

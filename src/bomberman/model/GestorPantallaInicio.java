@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 public class GestorPantallaInicio extends Observable {
 	private static GestorPantallaInicio miGestor = null;
 	private String bombermanActivo;
-	private Tablero tablero;
 	private boolean partidaIniciada;
 	
 	private GestorPantallaInicio() {
