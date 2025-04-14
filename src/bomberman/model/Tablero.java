@@ -10,6 +10,7 @@ public abstract class Tablero {
 	private static final int ROWS=11;
 	private static final int COLS=17;
 	private Casilla[][] casillas;
+	private String dir="";
 
 	protected Tablero() {
 		this.setCasillas(new Casilla[getRows()][getCols()]);
@@ -31,6 +32,18 @@ public abstract class Tablero {
 		while (i<getRows() && !movido) {
 			while (j<getCols() && !movido) {
 				if(casillas[i][j].tieneBomberman() && casillas[i][j].getEstadoBomberman().equals("vivo") && !(i+pX<0||i+pX>=getRows()||j+pY<0||j+pY>=getCols()||getCasillas()[i+pX][j+pY].tieneBloque())) {
+					
+					// Establecer dirección antes de mover
+					if (pX == -1 && pY == 0) {
+						setDir("w");
+					} else if (pX == 0 && pY == -1) {
+						setDir("a");
+					} else if (pX == 1 && pY == 0) {
+						setDir("s");
+					} else if (pX == 0 && pY == 1) {
+						setDir("d");
+					}
+
 					casillas[i][j].moverBomberman(pX,pY);
 					movido = true;
 				}
@@ -40,6 +53,7 @@ public abstract class Tablero {
 			i++;
 		}
 	}
+		
 
 	public void ponerBomba() {
 		int i,j;
@@ -214,4 +228,13 @@ public abstract class Tablero {
 		return vivos;
 	}
 
+	private void setDir(String c)
+	{
+		this.dir=c;
+	}
+
+	public String getDir()
+	{
+		return this.dir;
+	}
 }

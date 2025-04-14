@@ -3,6 +3,7 @@ package bomberman.viewcontroller;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ public class JLabel2 extends JLabel implements Observer{
 	private static final long serialVersionUID = 1L;
 	private int x;
 	private int y;
+	//private Timer resetTimer;
 	
 	public JLabel2 (int pX, int pY) {
 		x = pX;
@@ -55,6 +57,7 @@ public class JLabel2 extends JLabel implements Observer{
 			String explosion = (String) res[4];
 			boolean win = (boolean) res[5];
 			String estadoBomberman = (String) res[6];
+			String dir = (String) res[7];
 			
 			if(win) {
 				JOptionPane.showMessageDialog(this, "WIN");
@@ -110,10 +113,39 @@ public class JLabel2 extends JLabel implements Observer{
 				}
 			}else if(!bomberman.equals("")) {
 				if (bomberman.equals("blanco")) {
- 					this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
+					if(dir.equals("w")){
+						this.setIcon(new ImageIcon(getClass().getResource("whiteup2.png")));
+					} else if(dir.equals("a")){
+						this.setIcon(new ImageIcon(getClass().getResource("whiteleft2.png")));
+					} else if(dir.equals("s")){
+						this.setIcon(new ImageIcon(getClass().getResource("whitedown2.png")));
+					} else if(dir.equals("d")){
+						this.setIcon(new ImageIcon(getClass().getResource("whiteright2.png")));
+					} else {
+						this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
+					}
+
+					//volver a imagen default.
+					// resetTimer = new Timer(60, e -> {
+                    //     this.setIcon(new ImageIcon(getClass().getResource("whitehappy1.png")));
+                    // });
+                    // resetTimer.setRepeats(false);
+                    // resetTimer.start();
+	
  				}else {
- 					this.setIcon(new ImageIcon(getClass().getResource("blackhappy1.png")));
+					if(dir.equals("w")){
+						this.setIcon(new ImageIcon(getClass().getResource("blackup2.png")));
+					} else if(dir.equals("a")){
+						this.setIcon(new ImageIcon(getClass().getResource("blackleft2.png")));
+					} else if(dir.equals("s")){
+						this.setIcon(new ImageIcon(getClass().getResource("blackdown2.png")));
+					} else if(dir.equals("d")){
+						this.setIcon(new ImageIcon(getClass().getResource("blackright2.png")));
+					} else {
+						this.setIcon(new ImageIcon(getClass().getResource("blackhappy1.png")));
+					}
  				}
+			
 			}else if(!bloque.equals("")) {
 					if (bloque.equals("duro")) {
 						this.setIcon(new ImageIcon(getClass().getResource("hard5.png")));

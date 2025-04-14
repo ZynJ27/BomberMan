@@ -105,7 +105,7 @@ public class Casilla extends Observable{
 	private void notificar(boolean win) {
 		setChanged();
 		// array[i] = (condicion) ? valor_si_verdadero : valor_si_falso;
-		Object[] array = new Object[7];
+		Object[] array = new Object[8];
 		array[0] = (this.bomberman!=null) ? this.bomberman.getTipo() : "";
 		array[1] = (this.bomba!=null) ? this.bomba.getTipo() : "";
 		array[2] = (this.bloque!=null) ? this.bloque.getTipo() : "";
@@ -113,6 +113,7 @@ public class Casilla extends Observable{
 		array[4] = (this.explosion!=null) ? "explosion" : "";
 		array[5] = win;
 		array[6] = (this.bomberman!=null) ? this.bomberman.getEstadoActual() : "";;
+		array[7] = (this.bomberman!=null) ? GestorTablero.getGestor().getTablero().getDir() : "";
 		notifyObservers(array);
 	}
 	
