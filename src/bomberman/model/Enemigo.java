@@ -42,24 +42,6 @@ public abstract class Enemigo {
     }
     
     public void moverAleatorio() {
-//    	Random r = new Random();
-//    	int coord;
-//    	int x,y;
-//    	x=0;
-//    	y=0;
-//    	coord = r.nextInt(2);
-//    	if (coord == 0) {
-//    		x = r.nextInt(2);
-//    		if (x==0) {
-//    			x=-1;
-//    		}
-//    	}else {
-//    		y = r.nextInt(2);
-//    		if (y==0) {
-//    			y=-1;
-//    		}
-//	    }
-//    	GestorTablero.getGestor().getTablero().moverEnemigo(x,y,id);
     	GestorTablero.getGestor().getTablero().moverEnemigo(x,y,id);
     }
 

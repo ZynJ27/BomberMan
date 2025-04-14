@@ -163,18 +163,18 @@ public abstract class Tablero {
 	}
 
 	public void moverEnemigo(int x, int y, int id) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		ArrayList<String> movimientos = new ArrayList<String>();
-		if (x-1>=0&&!(casillas[x-1][y].tieneBloque()||casillas[x-1][y].tieneEnemigo()||casillas[x-1][y].tieneExplosion())) {//arriba
+		if (x-1>=0&&!casillas[x-1][y].tieneBloque()&&!casillas[x-1][y].tieneEnemigo()&&!casillas[x-1][y].tieneExplosion()&&!(x-2>=0&&casillas[x-2][y].tieneEnemigo())&&!(y-1>=0&&casillas[x-1][y-1].tieneEnemigo())&&!(y+1<getCols()&&casillas[x-1][y+1].tieneEnemigo())) {//arriba
 			movimientos.add("Arriba");
 		}
-		if(x+1<getRows()&&!(casillas[x+1][y].tieneBloque()||casillas[x+1][y].tieneEnemigo()||casillas[x+1][y].tieneExplosion())) {//abajo
+		if(x+1<getRows()&&!casillas[x+1][y].tieneBloque()&&!casillas[x+1][y].tieneEnemigo()&&!casillas[x+1][y].tieneExplosion()&&!(x+2<getRows()&&casillas[x+2][y].tieneEnemigo())&&!(y-1>=0&&casillas[x+1][y-1].tieneEnemigo())&&!(y+1<getCols()&&casillas[x+1][y+1].tieneEnemigo())) {//abajo
 			movimientos.add("Abajo");
 		}
-		if(y-1>=0&&!(casillas[x][y-1].tieneBloque()||casillas[x][y-1].tieneEnemigo()||casillas[x][y-1].tieneExplosion())) {//izq
+		if(y-1>=0&&!casillas[x][y-1].tieneBloque()&&!casillas[x][y-1].tieneEnemigo()&&!casillas[x][y-1].tieneExplosion()&&!(y-2>=0&&casillas[x][y-2].tieneEnemigo())&&!(x-1>=0&&casillas[x-1][y-1].tieneEnemigo())&&!(x+1<getRows()&&casillas[x+1][y-1].tieneEnemigo())) {//izq
 			movimientos.add("Izquierda");
 		}
-		if(y+1<getCols()&&!(casillas[x][y+1].tieneBloque()||casillas[x][y+1].tieneEnemigo()||casillas[x][y+1].tieneExplosion())) {//der
+		if(y+1<getCols()&&!casillas[x][y+1].tieneBloque()&&!casillas[x][y+1].tieneEnemigo()&&!casillas[x][y+1].tieneExplosion()&&!(y+2<getCols()&&casillas[x][y+2].tieneEnemigo())&&!(x-1>=0&&casillas[x-1][y+1].tieneEnemigo())&&!(x+1<getRows()&&casillas[x+1][y+1].tieneEnemigo())) {//der
 			movimientos.add("Derecha");
 		}
 
