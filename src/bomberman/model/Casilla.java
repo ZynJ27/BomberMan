@@ -1,7 +1,6 @@
 package bomberman.model;
-import java.util.Observable;
 
-import bomberman.viewcontroller.JLabel2;
+import java.util.Observable;
 
 public class Casilla extends Observable{
 	private Bloque bloque;

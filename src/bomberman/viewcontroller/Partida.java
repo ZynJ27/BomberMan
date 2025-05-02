@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import bomberman.model.GestorSonidos;
 import bomberman.model.GestorTablero;
 
 import java.awt.GridLayout;
@@ -102,46 +103,26 @@ public class Partida extends JFrame{
 
 		@Override
 		public void windowOpened(WindowEvent e) {
-			// TODO Auto-generated method stub
 			GestorTablero.getGestor().getTablero().actualizarCasillas();
-			//cambiar por una llamada a otra mae
+			GestorSonidos.getGestorSonidos().sonido("musicaPartida");
 		}
+		@Override
+		public void windowClosing(WindowEvent e) {}
 
 		@Override
-		public void windowClosing(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowClosed(WindowEvent e) {}
 
 		@Override
-		public void windowClosed(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowIconified(WindowEvent e) {}
 
 		@Override
-		public void windowIconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowDeiconified(WindowEvent e) {}
 
 		@Override
-		public void windowDeiconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowActivated(WindowEvent e) {}
 
 		@Override
-		public void windowActivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowDeactivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void windowDeactivated(WindowEvent e) {}
 		
 	}
 	
@@ -155,10 +136,7 @@ public class Partida extends JFrame{
 	private class Controlador implements KeyListener {
 		
 		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void keyTyped(KeyEvent e) {}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -166,24 +144,26 @@ public class Partida extends JFrame{
 			
 			if (e.getKeyCode()==KeyEvent.VK_W ||e.getKeyCode()==KeyEvent.VK_UP ) {
 				GestorTablero.getGestor().getTablero().moverBomberman(-1,0);
+				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_A || e.getKeyCode()==KeyEvent.VK_LEFT){
 				GestorTablero.getGestor().getTablero().moverBomberman(0,-1);
+				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_S || e.getKeyCode()==KeyEvent.VK_DOWN){
 				GestorTablero.getGestor().getTablero().moverBomberman(1,0);
+				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_D || e.getKeyCode()==KeyEvent.VK_RIGHT){
 				GestorTablero.getGestor().getTablero().moverBomberman(0,1);
+				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
+				
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				GestorTablero.getGestor().getTablero().ponerBomba();
+				GestorSonidos.getGestorSonidos().sonido("bombaPuesta");
 			}
 				
 		}
 
 		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void keyReleased(KeyEvent e) {}	
 	}
 	
 	private Controlador getControlador() {

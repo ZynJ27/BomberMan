@@ -1,6 +1,5 @@
 package bomberman.model;
 
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
