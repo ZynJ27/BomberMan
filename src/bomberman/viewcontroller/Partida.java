@@ -24,7 +24,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import bomberman.model.GestorSonidos;
 
 import javax.swing.JLabel;
@@ -80,7 +79,7 @@ public class Partida extends JFrame implements Observer{
             @Override 
             protected void paintComponent(Graphics g) { 
                 super.paintComponent(g); 
-                // Dibuja la imagen de fondo, escalandola para que se ajuste al tamaño del panel 
+                // Dibuja la imagen de fondo, escalandola para que se ajuste al tamaÃ±o del panel 
                 if (backgroundImage != null) { 
                     g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); 
                 } 
@@ -190,17 +189,6 @@ public class Partida extends JFrame implements Observer{
 				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				GestorTablero.getGestor().getTablero().ponerBomba();
-				GestorSonidos.getGestorSonidos().sonido("bombaPuesta");
-				Timer timer = new Timer();
- 	            timer.schedule(new TimerTask() {
- 	                @Override
- 	                public void run() {
- 	                    // Reproducir el sonido de la explosión
- 	                    GestorSonidos.getGestorSonidos().sonido("explosion");
- 	                    this.cancel();
- 	                }
- 	            }, 3000);
-				
 			}else if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
 				GestorTablero.getGestor().getTablero().cerrarPartida();
 			}else if(e.getKeyCode()==KeyEvent.VK_M) {

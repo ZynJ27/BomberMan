@@ -1,5 +1,7 @@
 package bomberman.model;
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Casilla extends Observable{
 	private Bloque bloque;
@@ -137,6 +139,16 @@ public class Casilla extends Observable{
 	public void ponerBomba() {
 		if(this.bomberman.puedePlantarBomba()) {
 			this.setBomba(this.bomberman.getBomba());
+			GestorSonidos.getGestorSonidos().sonido("bombaPuesta");
+			Timer timer = new Timer();
+	            timer.schedule(new TimerTask() {
+	                @Override
+	                public void run() {
+	                    // Reproducir el sonido de la explosi�n
+	                    GestorSonidos.getGestorSonidos().sonido("explosion");
+	                    this.cancel();
+	                }
+	            }, 3000);
 		}
 	}
 
