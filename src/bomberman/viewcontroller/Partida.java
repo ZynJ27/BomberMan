@@ -22,6 +22,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import bomberman.model.GestorSonidos;
 
 import javax.swing.JLabel;
@@ -33,7 +36,7 @@ public class Partida extends JFrame implements Observer{
 	private static int filas = 11;
 	private static int columnas = 17;
 	private Controlador controlador = null;
-	private Controlador2 controlador2 = null;
+	private ControladorVentana controladorVentana = null;
 
 	/**
 	 * Launch the application.
@@ -95,7 +98,7 @@ public class Partida extends JFrame implements Observer{
 		}
 		setVisible(true);
 		this.addKeyListener(getControlador());
-		this.addWindowListener(getControlador2());
+		this.addWindowListener(getControladorVentana());
 		GestorTablero.getGestor().getTablero().addObserver(this);
 	}
 
@@ -106,7 +109,7 @@ public class Partida extends JFrame implements Observer{
 		return lblNewLabel;
 	}
 	
-	private class Controlador2 implements WindowListener{
+	private class ControladorVentana implements WindowListener{
 
 		@Override
 		public void windowOpened(WindowEvent e) {
@@ -154,11 +157,11 @@ public class Partida extends JFrame implements Observer{
 		
 	}
 	
-	private Controlador2 getControlador2() {
-		if (controlador2 == null) {
-			controlador2 = new Controlador2();
+	private ControladorVentana getControladorVentana() {
+		if (controladorVentana == null) {
+			controladorVentana = new ControladorVentana();
 		}
-		return controlador2;
+		return controladorVentana;
 	}
 	
 	private class Controlador implements KeyListener {
@@ -188,6 +191,16 @@ public class Partida extends JFrame implements Observer{
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				GestorTablero.getGestor().getTablero().ponerBomba();
 				GestorSonidos.getGestorSonidos().sonido("bombaPuesta");
+				Timer timer = new Timer();
+ 	            timer.schedule(new TimerTask() {
+ 	                @Override
+ 	                public void run() {
+ 	                    // Reproducir el sonido de la explosión
+ 	                    GestorSonidos.getGestorSonidos().sonido("explosion");
+ 	                    this.cancel();
+ 	                }
+ 	            }, 3000);
+				
 			}else if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
 				GestorTablero.getGestor().getTablero().cerrarPartida();
 			}else if(e.getKeyCode()==KeyEvent.VK_M) {
@@ -221,13 +234,13 @@ public class Partida extends JFrame implements Observer{
 			
 			if (cerrar) {
 				this.removeKeyListener(getControlador());
-				this.removeWindowListener(getControlador2());
+				this.removeWindowListener(getControladorVentana());
 				Partida.this.dispose();
 				System.exit(0);
 			}
 			if (menu) {
 				this.removeKeyListener(getControlador());
-				this.removeWindowListener(getControlador2());
+				this.removeWindowListener(getControladorVentana());
 				Partida.this.dispose();
 				PantallaEleccion p =new PantallaEleccion();
 			}

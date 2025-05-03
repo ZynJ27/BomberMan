@@ -53,7 +53,7 @@ public class GestorSonidos {
         else if (pTipo.equals("elegido")) archivo = new File("src/bomberman/viewcontroller/elegidoBomberman.wav");
         else if (pTipo.equals("andarBomberman")) archivo = new File ("src/bomberman/viewcontroller/andarBomberman.wav");
         else if (pTipo.equals("bombaPuesta")) archivo = new File ("src/bomberman/viewcontroller/bombaPuesta.wav");
-        else if (pTipo.equals("explosion")) archivo = new File ("src/bomberman/viewcontroller/explosionSonidoPrueba.wav");
+        else if (pTipo.equals("explosion")) archivo = new File ("src/bomberman/viewcontroller/explosion.wav");
 
         try {
             // Cargar el archivo de sonido
