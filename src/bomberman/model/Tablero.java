@@ -1,11 +1,12 @@
 package bomberman.model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 import bomberman.viewcontroller.JLabel2;
 
-public abstract class Tablero {
+public abstract class Tablero extends Observable{
 
 	private static final int ROWS=11;
 	private static final int COLS=17;
@@ -236,5 +237,23 @@ public abstract class Tablero {
 	public String getDir()
 	{
 		return this.dir;
+	}
+	
+	public void cerrarPartida() {
+		setChanged();
+		Object[] a = new Object[2];
+		a[0]=true;
+		a[1]=false;
+		notifyObservers(a);
+		
+	}
+
+	public void volverAlMenu() {
+		// TODO Auto-generated method stub
+		setChanged();
+		Object[] a = new Object[2];
+		a[0]=false;
+		a[1]=true;
+		notifyObservers(a);
 	}
 }

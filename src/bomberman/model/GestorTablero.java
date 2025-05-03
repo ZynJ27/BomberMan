@@ -5,6 +5,7 @@ import java.util.Random;
 public class GestorTablero {
 	private static GestorTablero miGestor =null;
 	private Tablero t;
+	private String bomberman;
 	
 	
 	private GestorTablero ()
@@ -19,8 +20,9 @@ public class GestorTablero {
 		return miGestor;
 	}
 	
-	public void inicializarTablero(String bomberman, String tipoTablero)
+	public void inicializarTablero(String pBomberman, String tipoTablero)
 	{
+		this.bomberman=pBomberman;
 		t=TableroGenerator.getTableroGenerator().generarTablero(tipoTablero);
 		t.inicializarTablero();
 		if (bomberman.equals("Bomberman1"))
@@ -70,4 +72,14 @@ public class GestorTablero {
 			y = r.nextInt(Tablero.getCols());
 		} while (!t.crearEnemigo(tipo, x, y, id));
 		}
+
+	public String getTipoTablero() {
+		// TODO Auto-generated method stub
+		return this.getTablero().getTipoTablero();
+	}
+
+	public String getTipoBomberman() {
+		// TODO Auto-generated method stub
+		return this.bomberman;
+	}
 }

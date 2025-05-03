@@ -21,7 +21,7 @@ public class GestorPantallaInicio extends Observable {
 		return miGestor;
 	}
 
-	public void setBombermanActivo(String nombreBomberman) {
+	public void setBombermanActivo(String nombreBomberman) { 
 		GestorSonidos.getGestorSonidos().sonidoClickBomberman("seleccionar", bombermanActivo);
 		bombermanActivo = nombreBomberman;
 		notificar("");
@@ -34,6 +34,7 @@ public class GestorPantallaInicio extends Observable {
 		GestorTablero.getGestor().inicializarTablero(nombreBomberman, tipoTablero);
 		this.partidaIniciada=true;
 		notificar(tipoTablero);
+		this.partidaIniciada=false;
 	}
 
 

@@ -82,8 +82,6 @@ public class JLabel2 extends JLabel implements Observer{
  				}else {
  					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
  				}
-//				JOptionPane.showMessageDialog(this, "GAME OVER");
-//				System.exit(0);
 			}else if(!bomba.equals("") && !enemigo.equals("")) {
 				if (enemigo.equals("baloon")) {
 					this.setIcon(new ImageIcon(getClass().getResource("baloon1.png")));
@@ -103,8 +101,6 @@ public class JLabel2 extends JLabel implements Observer{
  				}else {
  					this.setIcon(new ImageIcon(getClass().getResource("onFire4.png")));
  				}
-				//JOptionPane.showMessageDialog(this, "GAME OVER");
-				//System.exit(0);
 			}else if(!bomba.equals("")) {
 				if (bomba.equals("super")) {
 					this.setIcon(new ImageIcon(getClass().getResource("bomb1.png")));

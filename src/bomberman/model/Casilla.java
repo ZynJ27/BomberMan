@@ -1,5 +1,4 @@
 package bomberman.model;
-
 import java.util.Observable;
 
 public class Casilla extends Observable{
@@ -187,6 +186,19 @@ public class Casilla extends Observable{
 
 	public String getEstadoBomberman(){
 		return this.bomberman.getEstadoActual();
+	}
+
+	public void pararTimers() {
+		// TODO Auto-generated method stub
+		if (this.bomba!=null) {
+			this.bomba.pararTimer();
+		}
+		if (this.enemigo!=null) {
+			this.enemigo.pararTimer();
+		}
+		if (this.explosion!=null) {
+			this.explosion.pararTimer();
+		}
 	}
 
 }

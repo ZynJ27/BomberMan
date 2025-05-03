@@ -3,17 +3,18 @@ package bomberman.viewcontroller;
 import javax.swing.*;
 
 import bomberman.model.GestorPantallaInicio;
-import bomberman.model.GestorSonidos;
-import bomberman.model.GestorTablero;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
+import bomberman.model.GestorSonidos;
+import bomberman.model.GestorTablero;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 
 public class PantallaEleccion extends JFrame implements Observer {
@@ -27,7 +28,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 	private ControladorMouse controladorMouse = null;
 	private ControladorVentana controladorVentana = null;
 	private JComboBox<String> comboBoxTableros;
-
+	
 	public PantallaEleccion() {
 		setTitle("Bomberman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,21 +45,22 @@ public class PantallaEleccion extends JFrame implements Observer {
 			}
 		};
 		mainPanel.setLayout(null);
-
-		//Añadir controlador a PantallaEleccion antes de hacer setVisible(true) porque si no no funciona.
-		this.addWindowListener(getControladorVentana());
+		
+		//Aï¿½adir controlador a PantallaEleccion antes de hacer setVisible(true) porque si no no funciona.
+				this.addWindowListener(getControladorVentana());
+		
 		setContentPane(mainPanel);
 		setVisible(true);
 
-		// Título
+		// TÃ­tulo
 		lblTitle = new JLabel();
 		lblTitle.setHorizontalAlignment(JLabel.CENTER);
 		lblTitle.setVerticalAlignment(JLabel.CENTER);
 		lblTitle.setBounds(0, 11, getWidth(), 100);
 		lblTitle.setIcon(new ImageIcon(getClass().getResource("title.png")));
 		mainPanel.add(lblTitle);
-
-
+		
+		
 		// Imagen del boss
 		lblBoss2 = new JLabel();
 		lblBoss2.setHorizontalAlignment(JLabel.CENTER);
@@ -66,7 +68,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblBoss2.setBounds(205, 95, 250, 250);
 		lblBoss2.setIcon(new ImageIcon(getClass().getResource("boss2.png")));
 		mainPanel.add(lblBoss2);
-
+		
 		lblBoss3 = new JLabel();
 		lblBoss3.setHorizontalAlignment(JLabel.CENTER);
 		lblBoss3.setVerticalAlignment(JLabel.CENTER);
@@ -74,12 +76,12 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblBoss3.setIcon(new ImageIcon(getClass().getResource("boss3.png")));
 		mainPanel.add(lblBoss3);
 
-		// Imágenes de los Bomberman
+		// ImÃ¡genes de los Bomberman
 		lblBomberman1 = new JLabelBomberman("Bomberman1", "bomber1.png");
 		lblBomberman1.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman1.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman1.setBounds(109, 272, 100, 120);
-
+		
 		//lblBomberman1.addMouseListener(getControladorMouse());
 		//lblBomberman1.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman1);
@@ -88,7 +90,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblBomberman2.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman2.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman2.setBounds(71, 141, 100, 120);
-
+		
 		//lblBomberman2.addMouseListener(getControladorMouse());
 		//lblBomberman2.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman2);
@@ -97,7 +99,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblBomberman3.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman3.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman3.setBounds(495, 141, 100, 120);
-
+		
 		//lblBomberman3.addMouseListener(getControladorMouse());
 		//lblBomberman3.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman3);
@@ -106,12 +108,12 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblBomberman4.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman4.setVerticalAlignment(JLabel.CENTER);
 		lblBomberman4.setBounds(450, 272, 100, 120);
-
+		
 		//lblBomberman4.addMouseListener(getControladorMouse());
 		//lblBomberman4.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman4);
 		bombermans = new ArrayList<JLabelBomberman>();
-
+		
 
 		// Monstruos
 		lblMonster1 = new JLabel();
@@ -127,31 +129,31 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblMonster2.setIcon(new ImageIcon(getClass().getResource("doria2.png")));
 		lblMonster2.setBounds(628, 346, 50, 50);
 		mainPanel.add(lblMonster2);
-
-		JLabel lblTipoTablero = new JLabel("Seleccione un tablero");
+		
+		JLabel lblTipoTablero = new JLabel("Seleccione una tablero");
 		lblTipoTablero.setForeground(Color.BLACK);
 		lblTipoTablero.setBounds(265,335,200,20);
 		mainPanel.add(lblTipoTablero);
-
+		
 		comboBoxTableros = new JComboBox<>();
 		comboBoxTableros.setBounds(265, 356, 150, 30);
 		comboBoxTableros.setBackground(Color.WHITE);
 		comboBoxTableros.setForeground(Color.BLACK);
-		mainPanel.add(comboBoxTableros);
-		mainPanel.setComponentZOrder(comboBoxTableros, 0); 
-
-		// Agregar elementos al JComboBox
-		comboBoxTableros.addItem("classic");
-		comboBoxTableros.addItem("soft");
-		comboBoxTableros.addItem("empty");;
-
-
+        mainPanel.add(comboBoxTableros);
+        mainPanel.setComponentZOrder(comboBoxTableros, 0); 
+        
+        // Agregar elementos al JComboBox
+        comboBoxTableros.addItem("classic");
+        comboBoxTableros.addItem("soft");
+        comboBoxTableros.addItem("empty");;
+        
+        
 		mainPanel.revalidate();
 		mainPanel.repaint();
 		mainPanel.addMouseMotionListener(this.getControladorMouse());
 		mainPanel.addMouseListener(this.getControladorMouse());
 		GestorPantallaInicio.getGestorPantallaInicio().addObserver(this); 
-
+	
 
 	}
 
@@ -163,6 +165,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 	}
 
 	private class ControladorMouse extends MouseAdapter {
+	
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			Component comp = ((JPanel) e.getSource()).getComponentAt(e.getPoint());
@@ -180,9 +183,10 @@ public class PantallaEleccion extends JFrame implements Observer {
 			Component comp = ((JPanel) e.getSource()).getComponentAt(e.getPoint());
 			if (comp instanceof JLabelBomberman) {
 				JLabelBomberman lbl = (JLabelBomberman) comp;
+				
 				// Obtener el tipo de tablero seleccionado
 				String tipoTablero = (String) comboBoxTableros.getSelectedItem();
-
+				
 				// Notificar al gestor para crear el tablero adecuado
 				GestorPantallaInicio.getGestorPantallaInicio().setPartida(lbl.getNombreBomberman(),tipoTablero);
 			}
@@ -190,7 +194,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 
 		}
 	}
-
+	
 	private ControladorVentana getControladorVentana() {
 		if (controladorVentana == null) {
 			controladorVentana = new ControladorVentana();
@@ -226,7 +230,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		public void windowDeactivated(WindowEvent e) {}
 
 	}
-
+	
 	private Iterator<JLabelBomberman> getIterator() {
 		return this.bombermans.iterator();
 	}
@@ -247,13 +251,15 @@ public class PantallaEleccion extends JFrame implements Observer {
 				jlb = itr.next();
 				estaQ = jlb.setCambio(bombermanActivo);
 			}
-
+			
 			if (partidaIniciada) {
+				GestorPantallaInicio.getGestorPantallaInicio().deleteObserver(this);
+				mainPanel.removeMouseMotionListener(this.getControladorMouse());
+				mainPanel.removeMouseListener(this.getControladorMouse());
 				PantallaEleccion.this.dispose();
 				Partida p = new Partida(tipoTablero);
-				p.setVisible(true);
 			}
-
+			
 		}
 	}
 }
