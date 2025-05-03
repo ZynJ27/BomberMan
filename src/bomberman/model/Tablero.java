@@ -1,6 +1,7 @@
 package bomberman.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Random;
 
@@ -26,55 +27,41 @@ public abstract class Tablero extends Observable{
 	}
 
 	public void moverBomberman(int pX, int pY) {
-		int i,j;
-		boolean movido = false;
-		i=0;
-		j=0;
-		while (i<getRows() && !movido) {
-			while (j<getCols() && !movido) {
-				if(casillas[i][j].tieneBomberman() && casillas[i][j].getEstadoBomberman().equals("vivo") && !(i+pX<0||i+pX>=getRows()||j+pY<0||j+pY>=getCols()||getCasillas()[i+pX][j+pY].tieneBloque())) {
-					
-					// Establecer direcciÃ³n antes de mover
-					if (pX == -1 && pY == 0) {
-						setDir("w");
-					} else if (pX == 0 && pY == -1) {
-						setDir("a");
-					} else if (pX == 1 && pY == 0) {
-						setDir("s");
-					} else if (pX == 0 && pY == 1) {
-						setDir("d");
-					}
+		Object[] array=Arrays.stream(casillas)
+				.flatMap(fila->Arrays.stream(fila))
+				.filter(c->c.tieneBomberman() && c.getEstadoBomberman().equals("vivo"))
+				.toArray();
 
-					casillas[i][j].moverBomberman(pX,pY);
-					movido = true;
-				}
-				j++;
+		Casilla c=(Casilla) array[0];
+		int nuevoX=c.getX()+pX;
+		int nuevoY=c.getY()+pY;
+		if(!(nuevoX<0||nuevoX>=getRows()||nuevoY<0||nuevoY>=getCols()||casillas[nuevoX][nuevoY].tieneBloque())) {
+			// Establecer dirección antes de mover
+			if (pX == -1 && pY == 0) {
+				setDir("w");
+			} else if (pX == 0 && pY == -1) {
+				setDir("a");
+			} else if (pX == 1 && pY == 0) {
+				setDir("s");
+			} else if (pX == 0 && pY == 1) {
+				setDir("d");
 			}
-			j=0;
-			i++;
+			c.moverBomberman(pX,pY);
 		}
 	}
 		
-
+	
 	public void ponerBomba() {
-		int i,j;
-		boolean plantado = false;
-		i=0;
-		j=0;
-		while (i<getRows() && !plantado) {
-			while (j<getCols() && !plantado) {
-				if(casillas[i][j].tieneBomberman() && casillas[i][j].getEstadoBomberman().equals("vivo")) {
-					casillas[i][j].ponerBomba();
-					plantado = true;
-				}
-				j++;
-			}
-			j=0;
-			i++;
-		}
+		Object[] array=Arrays.stream(casillas)
+				.flatMap(fila->Arrays.stream(fila))
+				.filter(c->c.tieneBomberman() && c.getEstadoBomberman().equals("vivo"))
+				.toArray();
 
+		Casilla c=(Casilla) array[0];
+		c.ponerBomba();
 	}
-
+	
+	
 	public void explotarBomba(int pX, int pY, int pRadio) {
 		boolean arriba=false;
 		boolean abajo=false;
@@ -156,12 +143,9 @@ public abstract class Tablero extends Observable{
 	}
 
 	public void actualizarCasillas() {
-		// TODO Auto-generated method stub
-		for(int i=0;i<getRows();i++) {
-			for(int j=0;j<getCols();j++) {
-				casillas[i][j].actualizar();
-			}
-		}
+		Arrays.stream(casillas) //convierte la matriz en un stream de filas
+		.flatMap(fila->Arrays.stream(fila)) //stream de casilla para cada fila y combinar en uno
+		.forEach(c->c.actualizar());
 	}
 
 	protected void crearBomberMan(String bomberMan) {
@@ -173,12 +157,10 @@ public abstract class Tablero extends Observable{
 	public abstract String getTipoTablero();
 
 	public boolean crearEnemigo(String nombre, int x, int y,int id) {
-
 		return casillas[x][y].crearEnemigo(nombre,x,y,id);
 	}
 
 	public void moverEnemigo(int x, int y, int id) {
-		// TODO Auto-generated method stub 
 		ArrayList<String> movimientos = new ArrayList<String>();
 		if (x-1>=0&&!casillas[x-1][y].tieneBloque()&&!casillas[x-1][y].tieneEnemigo()&&!casillas[x-1][y].tieneExplosion()&&!(x-2>=0&&casillas[x-2][y].tieneEnemigo())&&!(y-1>=0&&casillas[x-1][y-1].tieneEnemigo())&&!(y+1<getCols()&&casillas[x-1][y+1].tieneEnemigo())) {//arriba
 			movimientos.add("Arriba");
@@ -210,23 +192,9 @@ public abstract class Tablero extends Observable{
 	}
 
 	public boolean comprobarEnemigosVivos() {
-		// TODO Auto-generated method stub
-		int i,j;
-		boolean vivos = false;
-		i=0;
-		j=0;
-		while (i<getRows() && !vivos) {
-			while (j<getCols() && !vivos) {
-				if(casillas[i][j].tieneEnemigo()) {
-					vivos = true;
-					
-				}
-				j++;
-			}
-			j=0;
-			i++;
-		}
-		return vivos;
+		return Arrays.stream(casillas) //stream<Casilla[]>
+				.flatMap(fila->Arrays.stream(fila)) //stream<Casilla>
+				.anyMatch(c->c.tieneEnemigo());
 	}
 
 	private void setDir(String c)
@@ -249,7 +217,6 @@ public abstract class Tablero extends Observable{
 	}
 
 	public void volverAlMenu() {
-		// TODO Auto-generated method stub
 		setChanged();
 		Object[] a = new Object[2];
 		a[0]=false;
