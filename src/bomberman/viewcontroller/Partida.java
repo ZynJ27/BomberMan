@@ -13,10 +13,14 @@ import bomberman.model.GestorTablero;
 
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JLabel;
 
@@ -27,23 +31,23 @@ public class Partida extends JFrame{
 	private static int filas = 11;
 	private static int columnas = 17;
 	private Controlador controlador = null;
-	private Controlador2 controlador2 = null;
+	private ControladorVentana controladorVentana = null;
 
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Partida frame = new Partida();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	//	public static void main(String[] args) {
+	//		EventQueue.invokeLater(new Runnable() {
+	//			public void run() {
+	//				try {
+	//					Partida frame = new Partida();
+	//					frame.setVisible(true);
+	//				} catch (Exception e) {
+	//					e.printStackTrace();
+	//				}
+	//			}
+	//		});
+	//	}
 
 	/**
 	 * Create the frame.
@@ -53,8 +57,8 @@ public class Partida extends JFrame{
 		setBounds(390, 180, 700, 450);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		
-		 // Cargar la imagen de fondo
+
+		// Cargar la imagen de fondo
 		String tipo = tipoTablero;
 		ImageIcon backgroundIcon;
 		if (tipo.equals("classic")) {
@@ -64,23 +68,23 @@ public class Partida extends JFrame{
 		} else {
 			backgroundIcon = new ImageIcon(getClass().getResource("stageBack2.png"));
 		}
-        Image backgroundImage = backgroundIcon.getImage();
+		Image backgroundImage = backgroundIcon.getImage();
 
-        // Crear el panel de fondo con la imagen
-        contentPane = new JPanel() { 
-            @Override 
-            protected void paintComponent(Graphics g) { 
-                super.paintComponent(g); 
-                // Dibuja la imagen de fondo, escalandola para que se ajuste al tamaño del panel 
-                if (backgroundImage != null) { 
-                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); 
-                } 
-            } 
-        };
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new GridLayout(filas, columnas, 0, 0));
+		// Crear el panel de fondo con la imagen
+		contentPane = new JPanel() { 
+			@Override 
+			protected void paintComponent(Graphics g) { 
+				super.paintComponent(g); 
+				// Dibuja la imagen de fondo, escalandola para que se ajuste al tamaño del panel 
+				if (backgroundImage != null) { 
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); 
+				} 
+			} 
+		};
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new GridLayout(filas, columnas, 0, 0));
 		setContentPane(contentPane);
-	    
+
 		jLabels = new JLabel2[filas][columnas];
 		for (int i=0; i<filas;i++) {
 			for (int j=0;j<columnas;j++) {
@@ -89,7 +93,7 @@ public class Partida extends JFrame{
 		}
 		setVisible(true);
 		this.addKeyListener(getControlador());
-		this.addWindowListener(getControlador2());
+		this.addWindowListener(getControladorVentana());
 	}
 
 	private JLabel getLblNewLabel(int fila, int columna) {
@@ -98,8 +102,8 @@ public class Partida extends JFrame{
 		jLabels[fila][columna]=lblNewLabel;
 		return lblNewLabel;
 	}
-	
-	private class Controlador2 implements WindowListener{
+
+	private class ControladorVentana implements WindowListener{
 
 		@Override
 		public void windowOpened(WindowEvent e) {
@@ -110,7 +114,9 @@ public class Partida extends JFrame{
 		public void windowClosing(WindowEvent e) {}
 
 		@Override
-		public void windowClosed(WindowEvent e) {}
+		public void windowClosed(WindowEvent e) {
+			GestorSonidos.getGestorSonidos().detenerMusica("partida");
+		}
 
 		@Override
 		public void windowIconified(WindowEvent e) {}
@@ -123,25 +129,23 @@ public class Partida extends JFrame{
 
 		@Override
 		public void windowDeactivated(WindowEvent e) {}
-		
+
 	}
-	
-	private Controlador2 getControlador2() {
-		if (controlador2 == null) {
-			controlador2 = new Controlador2();
+
+	private ControladorVentana getControladorVentana() {
+		if (controladorVentana == null) {
+			controladorVentana = new ControladorVentana();
 		}
-		return controlador2;
+		return controladorVentana;
 	}
-	
+
 	private class Controlador implements KeyListener {
-		
+
 		@Override
 		public void keyTyped(KeyEvent e) {}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
 			if (e.getKeyCode()==KeyEvent.VK_W ||e.getKeyCode()==KeyEvent.VK_UP ) {
 				GestorTablero.getGestor().getTablero().moverBomberman(-1,0);
 				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
@@ -154,24 +158,32 @@ public class Partida extends JFrame{
 			}else if(e.getKeyCode()==KeyEvent.VK_D || e.getKeyCode()==KeyEvent.VK_RIGHT){
 				GestorTablero.getGestor().getTablero().moverBomberman(0,1);
 				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
-				
+
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				GestorTablero.getGestor().getTablero().ponerBomba();
-				GestorSonidos.getGestorSonidos().sonido("bombaPuesta");
+				GestorSonidos.getGestorSonidos().sonido("bombaPuesta");	
+				Timer timer = new Timer();
+	            timer.schedule(new TimerTask() {
+	                @Override
+	                public void run() {
+	                    // Reproducir el sonido de la explosión
+	                    GestorSonidos.getGestorSonidos().sonido("explosion");
+	                    this.cancel();
+	                }
+	            }, 3000);
 			}
-				
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {}	
 	}
-	
+
 	private Controlador getControlador() {
 		if (controlador == null) {
 			controlador = new Controlador();
 		}
-	return controlador;
+		return controlador;
 	}
-	
-	
+
+
 }

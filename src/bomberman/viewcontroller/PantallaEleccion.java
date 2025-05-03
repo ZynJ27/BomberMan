@@ -128,7 +128,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblMonster2.setBounds(628, 346, 50, 50);
 		mainPanel.add(lblMonster2);
 
-		JLabel lblTipoTablero = new JLabel("Seleccione una tablero");
+		JLabel lblTipoTablero = new JLabel("Seleccione un tablero");
 		lblTipoTablero.setForeground(Color.BLACK);
 		lblTipoTablero.setBounds(265,335,200,20);
 		mainPanel.add(lblTipoTablero);
