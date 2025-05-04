@@ -98,6 +98,7 @@ public class Casilla extends Observable{
     }
 
 	public boolean tieneBloque() {
+		// TODO Auto-generated method stub
 		return bloque!=null;
 	}
 
@@ -143,7 +144,7 @@ public class Casilla extends Observable{
 	            timer.schedule(new TimerTask() {
 	                @Override
 	                public void run() {
-	                    // Reproducir el sonido de la explosión
+	                    // Reproducir el sonido de la explosiï¿½n
 	                    GestorSonidos.getGestorSonidos().sonido("explosion");
 	                    this.cancel();
 	                }
@@ -200,6 +201,7 @@ public class Casilla extends Observable{
 	}
 
 	public void pararTimers() {
+		// TODO Auto-generated method stub
 		if (this.bomba!=null) {
 			this.bomba.pararTimer();
 		}
@@ -210,7 +212,7 @@ public class Casilla extends Observable{
 			this.explosion.pararTimer();
 		}
 	}
-
+	
 	public int getX() {
 		return x;
 	}
@@ -218,4 +220,5 @@ public class Casilla extends Observable{
 	public int getY() {
 		return y;
 	}
+
 }

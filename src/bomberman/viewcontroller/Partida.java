@@ -177,16 +177,12 @@ public class Partida extends JFrame implements Observer{
 			
 			if (e.getKeyCode()==KeyEvent.VK_W ||e.getKeyCode()==KeyEvent.VK_UP ) {
 				GestorTablero.getGestor().getTablero().moverBomberman(-1,0);
-				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_A || e.getKeyCode()==KeyEvent.VK_LEFT){
 				GestorTablero.getGestor().getTablero().moverBomberman(0,-1);
-				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_S || e.getKeyCode()==KeyEvent.VK_DOWN){
 				GestorTablero.getGestor().getTablero().moverBomberman(1,0);
-				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_D || e.getKeyCode()==KeyEvent.VK_RIGHT){
 				GestorTablero.getGestor().getTablero().moverBomberman(0,1);
-				GestorSonidos.getGestorSonidos().sonido("andarBomberman");
 			}else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 				GestorTablero.getGestor().getTablero().ponerBomba();
 			}else if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
