@@ -84,11 +84,17 @@ public class Casilla extends Observable{
     	if(!pExplosion.equals("")) {
 			if (this.bomberman != null) {
 				this.bomberman.changeState(new EstadoMuerto());
+				GestorSonidos.getGestorSonidos().detenerMusica("partida");
+	    		GestorSonidos.getGestorSonidos().sonido("perder");
 			}
     		if(this.enemigo!=null) {
     			this.enemigo.pararTimer();
     			this.enemigo = null;
     			win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();
+    			if (win) {
+    				GestorSonidos.getGestorSonidos().detenerMusica("partida");
+        			GestorSonidos.getGestorSonidos().sonido("ganar");
+    			}
     		}
     		this.explosion = new Explosion(x,y);
     	}else {
