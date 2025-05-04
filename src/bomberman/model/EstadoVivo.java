@@ -9,7 +9,9 @@ public class EstadoVivo implements EstadoBomberman {
 
     @Override
     public void realizarPlantadoBomba(Bomberman b) {
-        b.plantarBomba();
+        if (b.puedePlantarBomba()) {
+        	b.plantarBomba();
+        }
     }
 
     @Override

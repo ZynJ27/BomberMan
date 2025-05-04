@@ -76,25 +76,19 @@ public abstract class Tablero extends Observable{
 		boolean ne = false;
 		boolean sw = false;
 		boolean se = false;
-		int i,j;
-		boolean explotado = false;
-		i=0;
-		j=0;
-		getCasillas()[pX][pY].setBomba("");
+		int i=0;
+		
+		casillas[pX][pY].setBomba("");
 
-		while (i<getRows() && !explotado) {
-			while (j<getCols() && !explotado) {
-				if(casillas[i][j].tieneBomberman()) {
-					casillas[i][j].bombaExplotada();
-					explotado = true;
-				}
-				j++;
-			}
-			j=0;
-			i++;
-		}
+		Object[] array=Arrays.stream(casillas)
+				.flatMap(fila->Arrays.stream(fila))
+				.filter(c->c.tieneBomberman())
+				.toArray();
 
-		getCasillas()[pX][pY].setExplosion("explosion");
+		Casilla c=(Casilla) array[0];
+		c.bombaExplotada();
+
+		casillas[pX][pY].setExplosion("explosion");
 
 		if (pRadio > 0) {
 			for (i=1;i<=pRadio;i++) {
