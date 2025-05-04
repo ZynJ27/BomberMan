@@ -61,7 +61,7 @@ public class JLabel2 extends JLabel implements Observer{
 			
 			if(win) {
 				JOptionPane.showMessageDialog(this, "WIN");
-				System.exit(0);
+				GestorTablero.getGestor().getTablero().volverAlMenu();
 			}
 			
 			if(estadoBomberman.equals("muerto")){

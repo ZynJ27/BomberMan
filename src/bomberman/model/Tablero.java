@@ -271,6 +271,9 @@ public abstract class Tablero extends Observable{
 
 	public void volverAlMenu() {
 		// TODO Auto-generated method stub
+		Arrays.stream(casillas) //stream<Casilla[]>
+		.flatMap(fila->Arrays.stream(fila)) //stream<Casilla>
+		.forEach(c -> c.pararTimers());
 		setChanged();
 		Object[] a = new Object[2];
 		a[0]=false;

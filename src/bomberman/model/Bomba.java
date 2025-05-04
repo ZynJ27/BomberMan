@@ -39,6 +39,7 @@ public abstract class Bomba {
 	}
 	
 	public void explotar() {
+		GestorSonidos.getGestorSonidos().sonido("explosion");
 		GestorTablero.getGestor().getTablero().explotarBomba(x, y,radioExplosion);
 	}
 

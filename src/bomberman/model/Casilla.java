@@ -146,15 +146,6 @@ public class Casilla extends Observable{
 		if(this.bomberman.puedePlantarBomba()) {
 			this.setBomba(this.bomberman.getBomba());
 			GestorSonidos.getGestorSonidos().sonido("bombaPuesta");
-			Timer timer = new Timer();
-	            timer.schedule(new TimerTask() {
-	                @Override
-	                public void run() {
-	                    // Reproducir el sonido de la explosi�n
-	                    GestorSonidos.getGestorSonidos().sonido("explosion");
-	                    this.cancel();
-	                }
-	            }, 3000);
 		}
 	}
 
