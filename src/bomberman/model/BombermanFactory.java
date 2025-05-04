@@ -14,6 +14,8 @@ public class BombermanFactory {
         Bomberman bomberman=null;
         if (tipo.equals("blanco")) {bomberman=new BombermanBlanco(pX,pY);}
         if (tipo.equals("negro")) {bomberman=new BombermanNegro(pX,pY);}
+        if (tipo.equals("rojo")) {bomberman=new BombermanRojo(pX,pY);}
+        if (tipo.equals("azul")) {bomberman=new BombermanAzul(pX,pY);}
         return bomberman;
     }
 }

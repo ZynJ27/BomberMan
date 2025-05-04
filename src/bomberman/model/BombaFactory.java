@@ -14,6 +14,8 @@ public class BombaFactory {
         Bomba bomba=null;
         if (tipo.equals("super")){bomba=new BombaSuper(pX,pY);}
         if (tipo.equals("ultra")){bomba=new BombaUltra(pX,pY);}
+        if(tipo.equals("diagonal")) {bomba=new BombaDiagonal(pX, pY);}
+        if(tipo.equals("x")) {bomba=new BombaX(pX, pY);}
         return bomba;
     }
 }

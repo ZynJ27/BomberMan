@@ -38,10 +38,12 @@ public class GestorTablero {
 		else if (bomberman.equals("Bomberman3"))
 		{
 			System.out.println("Bomberman azul");
+			t.crearBomberMan("azul");
 		}
 		else if (bomberman.equals("Bomberman4"))
 		{
 			System.out.println("Bomberman rojo");
+			t.crearBomberMan("rojo");
 		}
 		for (int i = 0; i < 6; i++) {
 			if (tipoTablero.equals("classic")) {
