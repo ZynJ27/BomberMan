@@ -31,8 +31,8 @@ public class JLabelBomberman extends JLabel implements Observer {
 	}
 	
 	 public String getNombreBomberman() {
-	        return nombreBomberman;
-	    }
+		 return nombreBomberman;
+		 }
 
 	private static ImageIcon toGrayScale(ImageIcon icon) {
 		BufferedImage img = new BufferedImage(
@@ -46,18 +46,7 @@ public class JLabelBomberman extends JLabel implements Observer {
 
 		return new ImageIcon(img);
 	}
-	public boolean setCambio(String pNombreBombermanActivo)
-	{
-		if(this.nombreBomberman.equals(pNombreBombermanActivo))
-		{
-			this.setIcon(originalIcon);
-			return true;
-		}
-		else {
-			this.setIcon(grayIcon);
-			return false;
-		}
-	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {

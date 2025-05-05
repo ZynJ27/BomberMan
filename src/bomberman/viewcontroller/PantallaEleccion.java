@@ -25,7 +25,6 @@ public class PantallaEleccion extends JFrame implements Observer {
 	private JLabel lblTitle;
 	private JLabel lblBoss2, lblBoss3;
 	private JLabelBomberman lblBomberman1, lblBomberman2, lblBomberman3, lblBomberman4;
-	private ArrayList<JLabelBomberman> bombermans;
 	private JLabel lblMonster1, lblMonster2;
 	private ControladorMouse controladorMouse = null;
 	private ControladorVentana controladorVentana = null;
@@ -48,13 +47,13 @@ public class PantallaEleccion extends JFrame implements Observer {
 		};
 		mainPanel.setLayout(null);
 		
-		//Aï¿½adir controlador a PantallaEleccion antes de hacer setVisible(true) porque si no no funciona.
+		//Añadir controlador a PantallaEleccion antes de hacer setVisible(true) porque si no no funciona.
 				this.addWindowListener(getControladorVentana());
 		
 		setContentPane(mainPanel);
 		setVisible(true);
 
-		// TÃ­tulo
+		// Título
 		lblTitle = new JLabel();
 		lblTitle.setHorizontalAlignment(JLabel.CENTER);
 		lblTitle.setVerticalAlignment(JLabel.CENTER);
@@ -78,7 +77,7 @@ public class PantallaEleccion extends JFrame implements Observer {
 		lblBoss3.setIcon(new ImageIcon(getClass().getResource("boss3.png")));
 		mainPanel.add(lblBoss3);
 
-		// ImÃ¡genes de los Bomberman
+		// Imágenes de los Bomberman
 		lblBomberman1 = new JLabelBomberman("Bomberman1", "bomber1.png");
 		lblBomberman1.setHorizontalAlignment(JLabel.CENTER);
 		lblBomberman1.setVerticalAlignment(JLabel.CENTER);
@@ -114,7 +113,6 @@ public class PantallaEleccion extends JFrame implements Observer {
 		//lblBomberman4.addMouseListener(getControladorMouse());
 		//lblBomberman4.addMouseMotionListener(getControladorMouse());
 		mainPanel.add(lblBomberman4);
-		bombermans = new ArrayList<JLabelBomberman>();
 		
 
 		// Monstruos
@@ -243,26 +241,14 @@ public class PantallaEleccion extends JFrame implements Observer {
 
 	}
 	
-	private Iterator<JLabelBomberman> getIterator() {
-		return this.bombermans.iterator();
-	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof GestorPantallaInicio) {
 			Object [] res = (Object[]) arg;
-			String bombermanActivo = (String) res[0];
+			//String bombermanActivo = (String) res[0];
 			boolean partidaIniciada = (boolean) res[1];
 			String tipoTablero = (String) res[2];
-
-			boolean estaQ = false;
-			Iterator<JLabelBomberman> itr = this.getIterator();
-			JLabelBomberman jlb = null;
-
-			while (itr.hasNext() && !estaQ) {
-				jlb = itr.next();
-				estaQ = jlb.setCambio(bombermanActivo);
-			}
 			
 			if (partidaIniciada) {
 				GestorPantallaInicio.getGestorPantallaInicio().deleteObserver(this);
