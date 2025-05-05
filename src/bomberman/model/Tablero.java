@@ -32,7 +32,7 @@ public abstract class Tablero extends Observable{
 				.filter(c->c.tieneBomberman() && c.getEstadoBomberman().equals("vivo"))
 				.toArray();
 
-		if (array!=null) {
+		if (array.length != 0) {
 			Casilla c=(Casilla) array[0];
 			int nuevoX=c.getX()+pX;
 			int nuevoY=c.getY()+pY;
