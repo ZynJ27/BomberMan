@@ -37,7 +37,7 @@ public abstract class Tablero extends Observable{
 			int nuevoX=c.getX()+pX;
 			int nuevoY=c.getY()+pY;
 			if(!(nuevoX<0||nuevoX>=getRows()||nuevoY<0||nuevoY>=getCols()||casillas[nuevoX][nuevoY].tieneBloque())) {
-				// Establecer direcci�n antes de mover
+				// Establecer direcci n antes de mover
 				if (pX == -1 && pY == 0) {
 					setDir("w");
 				} else if (pX == 0 && pY == -1) {
@@ -256,9 +256,10 @@ public abstract class Tablero extends Observable{
 
 	public void cerrarPartida() {
 		setChanged();
-		Object[] a = new Object[2];
+		Object[] a = new Object[3];
 		a[0]=true;
 		a[1]=false;
+		a[2]="";
 		notifyObservers(a);
 
 	}
@@ -269,9 +270,24 @@ public abstract class Tablero extends Observable{
 		.flatMap(fila->Arrays.stream(fila)) //stream<Casilla>
 		.forEach(c -> c.pararTimers());
 		setChanged();
-		Object[] a = new Object[2];
+		Object[] a = new Object[3];
 		a[0]=false;
 		a[1]=true;
+		a[2]="";
 		notifyObservers(a);
+	}
+
+	public void avisoFinJuego(boolean victoria) {
+	    setChanged();
+	    notifyObservers(new Object[]{false, false, victoria});
+	    Arrays.stream(casillas)
+	         .flatMap(fila -> Arrays.stream(fila))
+	         .forEach(Casilla::pararTimers);
+	}
+	public void avisoMuertoBomberman() {
+	    avisoFinJuego(false); // false indica derrota
+	}
+	public void notificarVictoria() {
+	    avisoFinJuego(true); // true indica victoria
 	}
 }

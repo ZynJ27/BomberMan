@@ -27,6 +27,7 @@ import java.util.TimerTask;
 import bomberman.model.GestorSonidos;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Partida extends JFrame implements Observer{
 
@@ -207,29 +208,36 @@ public class Partida extends JFrame implements Observer{
 		}
 	return controlador;
 	}
-
-	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		if (o instanceof Tablero) {
-			Object[] array = (Object[])arg;
-			boolean cerrar = (boolean) array[0];
-			boolean menu = (boolean) array[1]; 
-			
-			if (cerrar) {
-				this.removeKeyListener(getControlador());
-				this.removeWindowListener(getControladorVentana());
-				Partida.this.dispose();
-				System.exit(0);
-			}
-			if (menu) {
-				this.removeKeyListener(getControlador());
-				this.removeWindowListener(getControladorVentana());
-				Partida.this.dispose();
-				PantallaEleccion p =new PantallaEleccion();
-			}
-		}
+	    if (o instanceof Tablero) {
+	        Object[] array = (Object[]) arg;
+	        boolean cerrar = (boolean) array[0];
+	        boolean menu = (boolean) array[1];
+	        boolean victoria = array.length > 2 ? (boolean) array[2] : false;
+	        
+	        if (cerrar) {
+	            this.removeKeyListener(getControlador());
+	            this.removeWindowListener(getControladorVentana());
+	            Partida.this.dispose();
+	            System.exit(0);
+	        }
+	        else if (menu) {
+	            this.removeKeyListener(getControlador());
+	            this.removeWindowListener(getControladorVentana());
+	            Partida.this.dispose();
+	            new PantallaEleccion();
+	        }
+	        else if (array.length > 2) {
+	            this.removeKeyListener(getControlador());
+	            this.removeWindowListener(getControladorVentana());
+	            
+	            if (victoria) {
+	                JOptionPane.showMessageDialog(this, "¡Has ganado!", "Victoria", JOptionPane.INFORMATION_MESSAGE);
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Game Over", "Derrota", JOptionPane.ERROR_MESSAGE);
+	            }
+	            Partida.this.dispose();
+	        }
+	    }
 	}
-	
-	
 }

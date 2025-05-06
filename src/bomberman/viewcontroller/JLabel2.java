@@ -59,11 +59,14 @@ public class JLabel2 extends JLabel implements Observer{
 			String estadoBomberman = (String) res[6];
 			String dir = (String) res[7];
 			
-			if(win) {
-				JOptionPane.showMessageDialog(this, "WIN");
-				GestorTablero.getGestor().getTablero().volverAlMenu();
-			}
-			
+			//if(win) {
+				//JOptionPane.showMessageDialog(this, "WIN", "Victory", JOptionPane.INFORMATION_MESSAGE);
+				//GestorTablero.getGestor().getTablero().volverAlMenu();
+			//}
+			//if (estadoBomberman.equals("muerto")){
+				//JOptionPane.showMessageDialog(this, "Loss", "Game Over", JOptionPane.ERROR_MESSAGE);
+				//System.exit(0);
+			//}
 			if(estadoBomberman.equals("muerto")){
 				if (bomberman.equals("blanco")) {
  					this.setIcon(new ImageIcon(getClass().getResource("onFire1.png")));

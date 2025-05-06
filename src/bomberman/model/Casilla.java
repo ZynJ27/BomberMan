@@ -48,25 +48,37 @@ public class Casilla extends Observable{
 		}
     }
 
-    public void setEnemigo(Enemigo pEnemigo) {
-    	boolean win = false;
-    	if(this.explosion!=null&&(pEnemigo!=null||this.enemigo!=null)) {
-    		if(pEnemigo!=null) {
-    			pEnemigo.pararTimer();
-    		}else {
-    			this.enemigo.pararTimer();
-    		}
-    		this.enemigo=null;
-    		win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();//true si hay enemigos vivos
-    	}else {
-        this.enemigo = pEnemigo;
-    	}
-    	
-    	if(pEnemigo!=null&&this.bomberman!=null) {
-    		this.bomberman.changeState(new EstadoMuerto());
-    	}
-    	notificar(win);
-    }
+	public void setEnemigo(Enemigo pEnemigo) {
+	    boolean win = false;
+	    if(this.explosion != null && (pEnemigo != null || this.enemigo != null)) {
+	        if(pEnemigo != null) {
+	            pEnemigo.pararTimer();
+	        } else {
+	            this.enemigo.pararTimer();
+	        }
+	        this.enemigo = null;
+
+	        win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();
+	        
+	        if(win) {
+	            GestorSonidos.getGestorSonidos().detenerMusica("partida");
+	            GestorSonidos.getGestorSonidos().sonido("ganar");
+	            GestorTablero.getGestor().getTablero().notificarVictoria();
+	        }
+	    } 
+	    else {
+	        this.enemigo = pEnemigo;
+	    }
+	    
+	    if(this.bomberman != null && (pEnemigo != null || this.enemigo != null)) {
+	        this.bomberman.changeState(new EstadoMuerto());
+	        GestorSonidos.getGestorSonidos().detenerMusica("partida");
+	        GestorSonidos.getGestorSonidos().sonido("perder");
+	        GestorTablero.getGestor().getTablero().avisoMuertoBomberman();
+	    }
+	    
+	    notificar(win);
+	}
 
     public void setBomberMan(Bomberman pBomberMan) {
     	this.bomberman=pBomberMan;
@@ -77,30 +89,35 @@ public class Casilla extends Observable{
     }
     
     public void setExplosion(String pExplosion) {
-    	boolean win = false;
-    	if(this.explosion!=null) {
-    		this.explosion.pararTimer();
-    	}
-    	if(!pExplosion.equals("")) {
-			if (this.bomberman != null) {
-				this.bomberman.changeState(new EstadoMuerto());
-				GestorSonidos.getGestorSonidos().detenerMusica("partida");
-	    		GestorSonidos.getGestorSonidos().sonido("perder");
-			}
-    		if(this.enemigo!=null) {
-    			this.enemigo.pararTimer();
-    			this.enemigo = null;
-    			win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();
-    			if (win) {
-    				GestorSonidos.getGestorSonidos().detenerMusica("partida");
-        			GestorSonidos.getGestorSonidos().sonido("ganar");
-    			}
-    		}
-    		this.explosion = new Explosion(x,y);
-    	}else {
-    		this.explosion = null;
-    	}
-    	notificar(win);
+        boolean win = false;
+        if(this.explosion != null) {
+            this.explosion.pararTimer();
+        }  
+        if(!pExplosion.equals("")) {
+            if (this.bomberman != null) {
+                this.bomberman.changeState(new EstadoMuerto());
+                GestorSonidos.getGestorSonidos().detenerMusica("partida");
+                GestorSonidos.getGestorSonidos().sonido("perder");
+                GestorTablero.getGestor().getTablero().avisoMuertoBomberman();
+            }
+            if(this.enemigo != null) {
+                this.enemigo.pararTimer();
+                this.enemigo = null;
+                win = !GestorTablero.getGestor().getTablero().comprobarEnemigosVivos();
+                if (win) {
+                    GestorTablero.getGestor().getTablero().notificarVictoria();
+                    GestorSonidos.getGestorSonidos().detenerMusica("partida");
+                    GestorSonidos.getGestorSonidos().sonido("ganar");
+                }
+            }
+            this.explosion = new Explosion(x, y);
+            if (win && this.bomberman != null && "muerto".equals(this.bomberman.getEstadoActual())) {
+                win = false; 
+            }
+        } else {
+            this.explosion = null;
+        }
+        notificar(win);
     }
 
 	public boolean tieneBloque() {
@@ -209,6 +226,7 @@ public class Casilla extends Observable{
 			this.explosion.pararTimer();
 		}
 	}
+	
 	
 	public int getX() {
 		return x;
